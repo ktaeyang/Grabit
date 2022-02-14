@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -9,58 +9,97 @@ import {
   View,
   Image,
 } from 'react-native';
+var currentDay = new Date();
+var theYear = currentDay.getFullYear();
+var theMonth = currentDay.getMonth();
+var theDate = currentDay.getDate();
+var theDayOfWeek = currentDay.getDay();
+var thisWeek = [];
 
-function DayCalendar({day, dayname, isToday}){
-    return (
-        <View style={isToday ? styles.todaycalendar : styles.daycalendar}>
-            <Text style={styles.day}>{dayname}</Text>
-            <Text style={styles.day}>{day}</Text>
-        </View>
-    )
+for (var i = 0; i < 7; i++) {
+  var resultDay = new Date(theYear, theMonth, theDate + (i - theDayOfWeek));
+  var yyyy = resultDay.getFullYear();
+  var mm = Number(resultDay.getMonth()) + 1;
+  var dd = resultDay.getDate();
+
+  mm = String(mm).length === 1 ? '0' + mm : mm;
+  dd = String(dd).length === 1 ? '0' + dd : dd;
+
+  thisWeek[i] = dd;
 }
 
-export default function Footer(){
-    return (
-        <View style={styles.header}>
-            <Image style={styles.calendarDirection} source={require('../../../image/calenderLeft.png')} />
-            <DayCalendar day={24} dayname={"일"} />
-            <DayCalendar day={25} dayname={"월"} />
-            <DayCalendar day={26} dayname={"화"} />
-            <DayCalendar day={27} dayname={"수"} />
-            <DayCalendar day={28} dayname={"목"} />
-            <DayCalendar day={29} dayname={"금"} />
-            <DayCalendar isToday={true} day={30} dayname={"토"} />
-            <Image style={styles.calendarDirection} source={require('../../../image/calendarRight.png')} />
-        </View>
-    )
+function DayCalendar({day, dayname, isToday}) {
+  return (
+    <View style={isToday ? styles.todaycalendar : styles.daycalendar}>
+      <Text style={styles.day}>{dayname}</Text>
+      <Text style={styles.day}>{day}</Text>
+    </View>
+  );
+}
+
+export default function Footer() {
+  const [todayNum, setTodayNum] = useState([]);
+  const temp = [];
+  useEffect(() => {
+    isToday();
+  }, []);
+  const isToday = () => {
+    for (var i = 0; i < 7; i++) {
+      if (theDate === thisWeek[i]) {
+        temp[i] = true;
+      } else {
+        temp[i] = false;
+      }
+    }
+    setTodayNum(temp)
+  };
+  return (
+    <View style={styles.header}>
+      <Image
+        style={styles.calendarDirection}
+        source={require('../../../image/calenderLeft.png')}
+      />
+      <DayCalendar day={thisWeek[0]} dayname={'일'} isToday={todayNum[0]} />
+      <DayCalendar day={thisWeek[1]} dayname={'월'} isToday={todayNum[1]} />
+      <DayCalendar day={thisWeek[2]} dayname={'화'} isToday={todayNum[2]} />
+      <DayCalendar day={thisWeek[3]} dayname={'수'} isToday={todayNum[3]} />
+      <DayCalendar day={thisWeek[4]} dayname={'목'} isToday={todayNum[4]} />
+      <DayCalendar day={thisWeek[5]} dayname={'금'} isToday={todayNum[5]} />
+      <DayCalendar day={thisWeek[6]} dayname={'토'} isToday={todayNum[6]} />
+      <Image
+        style={styles.calendarDirection}
+        source={require('../../../image/calendarRight.png')}
+      />
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
   header: {
-    flex : 0.15,
+    flex: 0.15,
     flexDirection: 'row',
     justifyContent: 'center',
     height: 80,
     marginVertical: 10,
   },
-  day:{
+  day: {
     textAlign: 'center',
     color: 'black',
     paddingVertical: 5,
   },
-  calendarDirection:{
+  calendarDirection: {
     marginVertical: 35,
-    marginHorizontal: 5
+    marginHorizontal: 5,
   },
-  todaycalendar:{
-    backgroundColor: "white",
-    elevation:1,
+  todaycalendar: {
+    backgroundColor: 'white',
+    //elevation: 1,
     paddingHorizontal: 18,
     marginHorizontal: 5,
     justifyContent: 'center',
-    borderRadius: 10,
     borderColor: '#EDEDED',
     borderWidth: 1,
+    borderRadius: 10,
   },
   daycalendar: {
     paddingHorizontal: 9,
