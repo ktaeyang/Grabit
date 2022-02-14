@@ -1,0 +1,34 @@
+{
+  "name": "grabit",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "start": "react-native start",
+    "test": "jest",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@react-native-async-storage/async-storage": "^1.15.14",
+    "@react-native-community/checkbox": "^0.5.9",
+    "@react-native-picker/picker": "^2.2.1",
+    "react": "17.0.2",
+    "react-native": "0.66.4",
+    "react-native-date-picker": "^4.1.3",
+    "react-native-picker-select": "^8.0.4"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.16.0",
+    "@babel/runtime": "^7.16.3",
+    "@react-native-community/eslint-config": "^3.0.1",
+    "babel-jest": "^27.4.4",
+    "eslint": "^8.4.1",
+    "jest": "^27.4.4",
+    "metro-react-native-babel-preset": "^0.66.2",
+    "react-test-renderer": "17.0.2"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}
