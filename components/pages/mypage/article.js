@@ -329,11 +329,11 @@ export default function Footer(props){
 
 const styles = StyleSheet.create({
     article:{
-        height: 510,
+        height: 1500,
         backgroundColor: 'white'
     },
     subDiv:{
-        height: 510,
+        height: 1500,
         backgroundColor: 'white',
         position: 'absolute',
         zIndex: 20,
