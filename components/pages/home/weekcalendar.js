@@ -94,17 +94,16 @@ const styles = StyleSheet.create({
   todaycalendar: {
     borderColor: '#EDEDED',
     borderWidth: 1,
-    borderRadius: 10,
     backgroundColor: 'white',
-    elevation: 1,
     paddingHorizontal: 18,
     marginHorizontal: 5,
     justifyContent: 'center',
+    borderRadius: 10,
+    elevation : 1,
   },
   daycalendar: {
     paddingHorizontal: 9,
     marginHorizontal: 5,
     justifyContent: 'center',
-    borderRadius: 10,
   },
 });

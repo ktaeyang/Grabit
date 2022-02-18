@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   ScrollView,
   StyleSheet,
@@ -10,47 +10,146 @@ import {
 } from 'react-native';
 import PerImage from '../perImage';
 
-
-function Check({ checked, setComplete, title, isTogether, done, whole, week, challenge}) {
+function Check({
+  checked,
+  setComplete,
+  title,
+  isTogether,
+  done,
+  whole,
+  week,
+  challenge,
+}) {
   return (
-    <View style={whole == 0 ? [styles.prevCheck, styles.noneCheck] : (checked ? (isTogether ? [styles.togetherCheck, styles.noneCheck] : [styles.aloneCheck, styles.noneCheck]) : styles.noneCheck)}>
+    <View
+      style={
+        whole == 0
+          ? [styles.prevCheck, styles.noneCheck]
+          : checked
+          ? isTogether
+            ? [styles.togetherCheck, styles.noneCheck]
+            : [styles.aloneCheck, styles.noneCheck]
+          : styles.noneCheck
+      }>
       <View style={styles.chartView}>
-        <Text style={styles.chartPst}>{week ? Math.round(done / challenge / 7 * 100, 2) : Math.round(done / challenge * 100, 2)}%</Text>
-        <Image style={styles.chartPer} source={require("../../../image/nonO.png")} />
-        <PerImage isTogether={isTogether} per={week ? Math.round(done / challenge / 7 * 100, 2) : Math.round(done / challenge * 100, 2)} />
+        <Text style={styles.chartPst}>
+          {week
+            ? Math.round((done / challenge / 7) * 100, 2)
+            : Math.round((done / challenge) * 100, 2)}
+          %
+        </Text>
+        <Image
+          style={styles.chartPer}
+          source={require('../../../image/nonO.png')}
+        />
+        <PerImage
+          isTogether={isTogether}
+          per={
+            week
+              ? Math.round((done / challenge / 7) * 100, 2)
+              : Math.round((done / challenge) * 100, 2)
+          }
+        />
       </View>
       <View style={styles.habitInfo}>
-        <Text style={checked ? (isTogether ? [styles.togetherChk, styles.noneTog]
-          : [styles.aloneChk, styles.noneTog]) : (isTogether ? [styles.togetherNoChk, styles.noneTog]
-            : [styles.aloneNoChk, styles.noneTog])}>
-          <Text style={{ fontWeight: '500', fontSize: 14 }}>
-            {challenge}<Text>{week ? "주" : "일"}</Text> 습관</Text>  |  {whole}일차
+        <Text
+          style={
+            checked
+              ? isTogether
+                ? [styles.togetherChk, styles.noneTog]
+                : [styles.aloneChk, styles.noneTog]
+              : isTogether
+              ? [styles.togetherNoChk, styles.noneTog]
+              : [styles.aloneNoChk, styles.noneTog]
+          }>
+          <Text style={{fontWeight: '500', fontSize: 14}}>
+            {challenge}
+            <Text>{week ? '주' : '일'}</Text> 습관
+          </Text>{' '}
+          | {whole}일차
         </Text>
 
-        <Text style={checked ? { color: 'white', fontWeight: '600', marginLeft: 2 } : { color: 'black', fontWeight: '600', marginLeft: 2 }}>{title}</Text>
+        <Text
+          style={
+            checked
+              ? {color: 'white', fontWeight: '600', marginLeft: 2}
+              : {color: 'black', fontWeight: '600', marginLeft: 2}
+          }>
+          {title}
+        </Text>
       </View>
-      <TouchableOpacity onPress={() => setComplete(true)} style={styles.checkInfo}>
-        <Image source={checked ? require('../../../image/checked.png') : require('../../../image/nonChecked.png')} />
+      <TouchableOpacity
+        onPress={() => setComplete(true)}
+        style={styles.checkInfo}>
+        <Image
+          source={
+            checked
+              ? require('../../../image/checked.png')
+              : require('../../../image/nonChecked.png')
+          }
+        />
       </TouchableOpacity>
     </View>
-  )
+  );
 }
 
 export default function CheckList(props) {
   return (
     <View style={styles.checklist}>
       <ScrollView>
-        <Check setComplete={props.setComplete} checked={true} title={"매일 아침에 일기 쓰기"} done={2} isTogether={true} whole={21} challenge={3} week={true} />
-        <Check setComplete={props.setComplete} checked={false} title={"손톱 물어뜯지 않기"} done={1} whole={3} challenge={3} week={false} />
-        <Check setComplete={props.setComplete} checked={false} title={"독일어 공부하기"} done={17} isTogether={true} whole={21} challenge={9} week={true} />
-        <Check setComplete={props.setComplete} checked={false} title={"독일어 공부하기"} done={0} isTogether={true} whole={0} challenge={3} week={false} />
-        <Check setComplete={props.setComplete} checked={false} title={"테스트"} done={0} isTogether={true} whole={0} challenge={3} week={false} />
+        <Check
+          setComplete={props.setComplete}
+          checked={true}
+          title={'매일 아침에 일기 쓰기'}
+          done={2}
+          isTogether={true}
+          whole={21}
+          challenge={3}
+          week={true}
+        />
+        <Check
+          setComplete={props.setComplete}
+          checked={false}
+          title={'손톱 물어뜯지 않기'}
+          done={1}
+          whole={3}
+          challenge={3}
+          week={false}
+        />
+        <Check
+          setComplete={props.setComplete}
+          checked={false}
+          title={'독일어 공부하기'}
+          done={17}
+          isTogether={true}
+          whole={21}
+          challenge={9}
+          week={true}
+        />
+        <Check
+          setComplete={props.setComplete}
+          checked={false}
+          title={'독일어 공부하기'}
+          done={0}
+          isTogether={true}
+          whole={0}
+          challenge={3}
+          week={false}
+        />
+        <Check
+          setComplete={props.setComplete}
+          checked={false}
+          title={'테스트'}
+          done={0}
+          isTogether={true}
+          whole={0}
+          challenge={3}
+          week={false}
+        />
       </ScrollView>
-
     </View>
-  )
+  );
 }
-
 
 const styles = StyleSheet.create({
   checklist: {
@@ -61,17 +160,17 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     marginRight: 10,
-    flex: 2
+    flex: 2,
   },
   habitInfo: {
-    flex: 7
+    flex: 7,
   },
   checkInfo: {
-    flex: 1
+    flex: 1,
   },
   chartPst: {
     textAlign: 'center',
-    paddingTop: 19
+    paddingTop: 19,
   },
   noneTog: {
     borderRadius: 25,
@@ -87,26 +186,26 @@ const styles = StyleSheet.create({
     borderColor: '#F1F1F1',
     borderWidth: 1,
     backgroundColor: 'white',
-    color: '#96E471'
+    color: '#96E471',
   },
   togetherNoChk: {
     backgroundColor: '#F1F1F1',
-    color: '#7D63EB'
+    color: '#7D63EB',
   },
   aloneChk: {
     backgroundColor: 'white',
-    color: '#71BC4E'
+    color: '#71BC4E',
   },
   togetherChk: {
     backgroundColor: 'white',
-    color: '#7D63EB'
+    color: '#7D63EB',
   },
   chart: {
     width: 50,
     height: 50,
     borderColor: '#EDEDED',
     borderWidth: 3,
-    borderRadius: 25
+    borderRadius: 25,
   },
   chartPer: {
     position: 'absolute',
@@ -117,13 +216,13 @@ const styles = StyleSheet.create({
     right: 1,
   },
   prevCheck: {
-    backgroundColor: '#F3F3F3'
+    backgroundColor: '#F3F3F3',
   },
   togetherCheck: {
-    backgroundColor: "#7D63EB"
+    backgroundColor: '#7D63EB',
   },
   aloneCheck: {
-    backgroundColor: "#96E471"
+    backgroundColor: '#96E471',
   },
   noneCheck: {
     flexDirection: 'row',
@@ -135,11 +234,11 @@ const styles = StyleSheet.create({
     borderColor: '#DEDEDE',
     borderWidth: 1,
     margin: 5,
-    elevation: (Platform.OS === 'android') ? 1 : 0,
+    elevation: Platform.OS === 'android' ? 1 : 0,
     //IOS
-    shadowColor: (Platform.OS === 'ios') && "#F3F3F3",  //그림자색
-    shadowOpacity: (Platform.OS === 'ios') && 0.3,//그림자 투명도
-    shadowOffset: (Platform.OS === 'ios') && { width: 2, height: 2 }, //그림자 위치
+    shadowColor: Platform.OS === 'ios' && '#F3F3F3', //그림자색
+    shadowOpacity: Platform.OS === 'ios' && 0.3, //그림자 투명도
+    shadowOffset: Platform.OS === 'ios' && {width: 2, height: 2}, //그림자 위치
     //ANDROID
   },
   daycalendar: {
@@ -150,7 +249,7 @@ const styles = StyleSheet.create({
   },
   detailTxt: {
     color: 'black',
-    textAlign: 'right'
+    textAlign: 'right',
   },
   title: {
     fontWeight: '700',
@@ -158,8 +257,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginHorizontal: 90,
     marginLeft: 120,
-    color: 'black'
-
+    color: 'black',
   },
   headerIcon: {
     width: 25,
