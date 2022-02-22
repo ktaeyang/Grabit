@@ -84,8 +84,8 @@ export default function Manual1(props) {
             <TouchableOpacity onPress={() => setManual2(true)} style={styles.purpleBtn}>
                 <Text style={styles.purpleBtnTxt}>다음</Text>
             </TouchableOpacity>
-            {manual2 ? <Manual2 setManual3={setManual3} setFinal={setFinal} setManual2={setManual2}/> : undefined}
-            {manual3 ? <Manual3 setFinal={setFinal} setManual3={setManual3} /> : undefined}
+            {manual2 ? <Manual2 setManual3={setManual3} setFinal={setFinal} setManual2={setManual2} setApp={props.setApp}/> : undefined}
+            {manual3 ? <Manual3 setFinal={setFinal} setManual3={setManual3} setApp={props.setApp}/> : undefined}
             {final ? <Final setApp={props.setApp} /> : undefined}
         </View>
     )
