@@ -213,8 +213,21 @@ function Official() {
           '공지사항 내용을 입력해 주세요. 공지사항 내용을 입력해 주세요. 공지사항 내용을 입력해 주세요. 공지사항 내용을 입력해 주세요. 공지사항 내용을 입력해 주세요.'
         }
       />
+      <TouchableOpacity style={{margin : 20, borderWidth : 2,}} onPress={AddNotices}><Text>공지사항 생성 테스트</Text></TouchableOpacity>
     </View>
   );
+}
+function AddNotices() {
+  fetch("http://193.123.253.133:5000/board/notice", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    "content": "공지사항 API 테스트 중입니다",
+    "subject": "공지사항 API 테스트 제목입니다"
+  }),
+}).then((response) => console.log(response));
 }
 function Service() {
   return (

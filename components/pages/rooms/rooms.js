@@ -125,6 +125,20 @@ function Room(props) {
   );
 }
 
+function NewRoom(props) {
+  return (
+    <TouchableOpacity
+      onPress={() => props.viewRoom(props.id)}
+      style={styles.newroom}>
+      <Image source={require('../../../image/thum1.png')} />
+      <View style={styles.roomInfo}>
+        <Text style={styles.newtitle}>{props.title}</Text>
+        <Text style={styles.newsubtitle}>{props.include}명 참여</Text>
+      </View>
+      <Text style={styles.newdday}>D-{props.d}</Text>
+    </TouchableOpacity>
+  );
+}
 export default function Rooms(props) {
   const [view, viewRoom] = useState(null);
   const [category, setCategory] = useState('HEALTH');
@@ -158,7 +172,7 @@ export default function Rooms(props) {
         />
         <View>
           <Image
-            style={{width: '100%', height: '14%', zIndex: 2}}
+            style={{width: '100%', resizeMode:'stretch', zIndex: 2, top : -30}}
             source={require('../../../image/selectHeader.png')}
           />
 
@@ -192,42 +206,40 @@ export default function Rooms(props) {
             <View>
               <Text
                 style={{
-                  fontWeight: '900',
-                  fontSize: 18,
+                  fontWeight: '800',
+                  fontSize: 16,
                   paddingLeft: 18,
                   color: 'black',
                   paddingTop: 20,
                 }}>
                 새로 열린 습관모임
               </Text>
-              <ScrollView>
-                <Room
+              
+                <NewRoom
                   viewRoom={viewRoom}
                   id={1}
                   title={'매일 아침에 일기 쓰기'}
                   include={32}
                   d={1}
                 />
-                <Room
+                <NewRoom
                   viewRoom={viewRoom}
                   id={2}
                   title={'하루 5분 명상하기'}
                   include={32}
                   d={1}
                 />
-              </ScrollView>
             </View>
             <Text
               style={{
-                fontWeight: '900',
-                fontSize: 18,
+                fontWeight: '800',
+                fontSize: 16,
                 paddingLeft: 18,
                 color: 'black',
                 paddingTop: 20,
               }}>
               습관모임
             </Text>
-            <ScrollView>
               <Room
                 viewRoom={viewRoom}
                 id={1}
@@ -263,7 +275,6 @@ export default function Rooms(props) {
                 include={32}
                 d={1}
               />
-            </ScrollView>
           </View>
         </View>
       </ScrollView>
@@ -282,17 +293,26 @@ const styles = StyleSheet.create({
     flex: 1,
     position: 'absolute',
     width: '100%',
-    height: 1500,
     zIndex: 2,
     backgroundColor: 'white',
   },
   room: {
+    backgroundColor : '#ffffff',
+    marginVertical: 8,
+    marginHorizontal: 15,
+    borderRadius: 10,
+    padding: 15,
+    flexDirection: 'row',
+    elevation : 2,
+  },
+  newroom: {
+    backgroundColor : '#7D63EB',
     borderWidth: 1,
     borderColor: '#000000A0',
     marginVertical: 8,
     marginHorizontal: 15,
-    borderRadius: 5,
-    padding: 10,
+    borderRadius: 10,
+    padding: 15,
     flexDirection: 'row',
   },
   roomInfo: {
@@ -300,35 +320,62 @@ const styles = StyleSheet.create({
   },
   dday: {
     backgroundColor: '#7d63e8',
-    height: 24,
+    height: 20,
     padding: 2,
-    borderRadius: 15,
+    borderRadius: 10,
     color: 'white',
-    paddingHorizontal: 5,
+    paddingHorizontal: 8,
+    fontSize : 12,
+    textAlign : 'center'
+  },
+  newdday: {
+    backgroundColor: '#ffffff',
+    height: 20,
+    padding: 2,
+    borderRadius: 10,
+    color: '#7D63EB',
+    paddingHorizontal: 8,
+    fontSize : 12,
+    textAlign : 'center'
   },
   dday2: {
+    fontWeight : '700',
     backgroundColor: '#7d63e8',
-    width: 40,
-    height: 24,
-    padding: 2,
-    borderRadius: 15,
+    borderRadius: 100,
     color: 'white',
-    paddingHorizontal: 5,
     marginTop: 160,
     marginBottom: 10,
-    textAlign: 'center',
     zIndex: 3,
+    paddingHorizontal : 10,
+    paddingVertical : 5,
   },
   title: {
     fontWeight: '900',
     color: 'black',
     marginTop: 10,
-    marginLeft: 5,
+    marginLeft: 10,
+    fontSize: 15,
+  },
+  newtitle: {
+    fontWeight: '900',
+    color: 'white',
+    marginTop: 10,
+    marginLeft: 10,
     fontSize: 15,
   },
   subtitle: {
     fontSize: 13,
-    marginLeft: 5,
+    fontWeight : '400',
+    marginLeft: 10,
+    marginTop : 5,
+    color : 'black'
+  },
+  newsubtitle: {
+    fontSize: 13,
+    fontWeight : '400',
+    marginLeft: 10,
+    marginTop : 5,
+    color : 'white'
   },
   sort: {
     marginLeft: 250,
@@ -354,7 +401,7 @@ const styles = StyleSheet.create({
     padding: 4,
     marginBottom: 50,
     zIndex: 3,
-    paddingHorizontal : 10,
+    paddingHorizontal: 10,
   },
   purpleBtn: {
     backgroundColor: '#7d63e8',
@@ -407,6 +454,7 @@ const styles = StyleSheet.create({
     width: '100%',
     resizeMode: 'stretch',
     zIndex: 2,
+    top : -40,
   },
   subDiv2: {
     width: '100%',
@@ -414,17 +462,17 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   Explanation: {
-    fontSize: 25,
+    fontSize: 20,
     marginBottom: 10,
     fontWeight: '900',
-    color : "#000000",
-    marginTop : 10,
+    color: '#000000',
+    marginTop: 10,
   },
   SubExplanation: {
-    fontSize: 15,
+    fontSize: 14,
     marginBottom: 10,
     fontWeight: '400',
-    color : "#000000",
-    marginTop : 10,
+    color: '#000000',
+    marginTop: 10,
   },
 });
