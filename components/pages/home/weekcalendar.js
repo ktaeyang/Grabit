@@ -31,7 +31,13 @@ for (var i = 0; i < 7; i++) {
 function DayCalendar({day, dayname, isToday}) {
   return (
     <View style={isToday ? styles.todaycalendar : styles.daycalendar}>
-      <Text style={styles.day}>{dayname}</Text>
+      {isToday && (
+          <Image
+            source={require('../../../image/Union.png')}
+            style={styles.union}
+          />
+      )}
+      <Text style={styles.dayname}>{dayname}</Text>
       <Text style={styles.day}>{day}</Text>
     </View>
   );
@@ -51,7 +57,7 @@ export default function Footer() {
         temp[i] = false;
       }
     }
-    setTodayNum(temp)
+    setTodayNum(temp);
   };
   return (
     <View style={styles.header}>
@@ -84,26 +90,38 @@ const styles = StyleSheet.create({
   },
   day: {
     textAlign: 'center',
-    color: 'black',
+    color: '#575555',
+    paddingVertical: 5,
+    fontWeight: 'bold',
+  },
+  dayname: {
+    textAlign: 'center',
+    color: '#B9B9B9',
     paddingVertical: 5,
   },
   calendarDirection: {
-    marginVertical: 35,
-    marginHorizontal: 5,
+    alignSelf: 'center',
+    marginHorizontal: 20,
   },
   todaycalendar: {
     borderColor: '#EDEDED',
-    borderWidth: 1,
+    borderWidth: 0.5,
     backgroundColor: 'white',
-    paddingHorizontal: 18,
-    marginHorizontal: 5,
-    justifyContent: 'center',
     borderRadius: 10,
-    elevation : 1,
+    elevation: 1,
+    justifyContent: 'center',
+    width : 53,
+    height : 70,
   },
   daycalendar: {
     paddingHorizontal: 9,
-    marginHorizontal: 5,
+    marginHorizontal: 6,
     justifyContent: 'center',
+  },
+  union: {
+    position : 'absolute',
+    resizeMode : 'stretch',
+    height : 30,
+    top : 45,
   },
 });

@@ -29,10 +29,13 @@ function Check({
           ? isTogether
             ? [styles.togetherCheck, styles.noneCheck]
             : [styles.aloneCheck, styles.noneCheck]
-          : styles.noneCheck
+          : [{backgroundColor: '#FFFFFF'}, styles.noneCheck]
       }>
       <View style={styles.chartView}>
-        <Text style={styles.chartPst}>
+        <Text
+          style={
+            checked ? [styles.chartPst, {color: '#ffffff'}] : styles.chartPst
+          }>
           {week
             ? Math.round((done / challenge / 7) * 100, 2)
             : Math.round((done / challenge) * 100, 2)}
@@ -54,7 +57,9 @@ function Check({
       <View style={styles.habitInfo}>
         <Text
           style={
-            checked
+            whole == 0
+              ? [styles.togetherNoChk, styles.noneTog]
+              : checked
               ? isTogether
                 ? [styles.togetherChk, styles.noneTog]
                 : [styles.aloneChk, styles.noneTog]
@@ -111,6 +116,7 @@ export default function CheckList(props) {
           setComplete={props.setComplete}
           checked={false}
           title={'손톱 물어뜯지 않기'}
+          isTogether={false}
           done={1}
           whole={3}
           challenge={3}
@@ -136,16 +142,6 @@ export default function CheckList(props) {
           challenge={3}
           week={false}
         />
-        <Check
-          setComplete={props.setComplete}
-          checked={false}
-          title={'테스트'}
-          done={0}
-          isTogether={true}
-          whole={0}
-          challenge={3}
-          week={false}
-        />
       </ScrollView>
     </View>
   );
@@ -161,6 +157,7 @@ const styles = StyleSheet.create({
     height: 50,
     marginRight: 10,
     flex: 2,
+    //justifyContent : 'center'
   },
   habitInfo: {
     flex: 7,
@@ -170,7 +167,10 @@ const styles = StyleSheet.create({
   },
   chartPst: {
     textAlign: 'center',
-    paddingTop: 19,
+    marginTop: 20,
+    marginLeft: 5,
+    fontWeight: '600',
+    color: '#8A8A8A',
   },
   noneTog: {
     borderRadius: 25,
@@ -185,7 +185,7 @@ const styles = StyleSheet.create({
   aloneNoChk: {
     borderColor: '#F1F1F1',
     borderWidth: 1,
-    backgroundColor: 'white',
+    backgroundColor: '#FFFFFF',
     color: '#96E471',
   },
   togetherNoChk: {
@@ -217,12 +217,15 @@ const styles = StyleSheet.create({
   },
   prevCheck: {
     backgroundColor: '#F3F3F3',
+    borderRadius: 10,
   },
   togetherCheck: {
     backgroundColor: '#7D63EB',
+    borderRadius: 10,
   },
   aloneCheck: {
     backgroundColor: '#96E471',
+    borderRadius: 10,
   },
   noneCheck: {
     flexDirection: 'row',
@@ -230,16 +233,14 @@ const styles = StyleSheet.create({
     paddingLeft: 12,
     paddingBottom: 18,
     borderRadius: 10,
-    //backgroundColor : '#F3F3F3',
     borderColor: '#DEDEDE',
     borderWidth: 1,
     margin: 5,
-    elevation: Platform.OS === 'android' ? 1 : 0,
+    elevation: 1,
     //IOS
     shadowColor: Platform.OS === 'ios' && '#F3F3F3', //그림자색
     shadowOpacity: Platform.OS === 'ios' && 0.3, //그림자 투명도
     shadowOffset: Platform.OS === 'ios' && {width: 2, height: 2}, //그림자 위치
-    //ANDROID
   },
   daycalendar: {
     justifyContent: 'center',

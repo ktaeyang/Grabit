@@ -74,29 +74,9 @@ function Oneroom(props) {
               <Text style={{width: 50, textAlign: 'center'}}>{el.name}</Text>
             </View>;
           })}
-          {/* // <View style={{marginHorizontal:10}}>
-                    //     <Image style={{width:50, height: 50}} source={require("../../../image/userbaseIcon.png")} />
-                    //     <Text style={{width:50, textAlign:'center'}}>참가자</Text>
-                    // </View>
-                    // <View style={{marginHorizontal:10}}>
-                    //     <Image style={{width:50, height: 50}} source={require("../../../image/userbaseIcon.png")} />
-                    //     <Text style={{width:50, textAlign:'center'}}>참가자</Text>
-                    // </View>
-                    // <View style={{marginHorizontal:10}}>
-                    //     <Image style={{width:50, height: 50}} source={require("../../../image/userbaseIcon.png")} />
-                    //     <Text style={{width:50, textAlign:'center'}}>참가자</Text>
-                    // </View>
-                    // <View style={{marginHorizontal:10}}>
-                    //     <Image style={{width:50, height: 50}} source={require("../../../image/userbaseIcon.png")} />
-                    //     <Text style={{width:50, textAlign:'center'}}>참가자</Text>
-                    // </View>
-                    // <View style={{marginHorizontal:10}}>
-                    //     <Image style={{width:50, height: 50}} source={require("../../../image/userbaseIcon.png")} />
-                    //     <Text style={{width:50, textAlign:'center'}}>참가자</Text>
-                    // </View> */}
         </View>
       </View>
-      <View>
+      <View style = {{}}>
         <TouchableOpacity
           onPress={() => props.viewRoom(null)}
           style={styles.purpleBtn2}>
@@ -172,7 +152,7 @@ export default function Rooms(props) {
         />
         <View>
           <Image
-            style={{width: '100%', resizeMode:'stretch', zIndex: 2, top : -30}}
+            style={{width: '100%', resizeMode: 'stretch', zIndex: 2, top: -30}}
             source={require('../../../image/selectHeader.png')}
           />
 
@@ -214,21 +194,21 @@ export default function Rooms(props) {
                 }}>
                 새로 열린 습관모임
               </Text>
-              
-                <NewRoom
-                  viewRoom={viewRoom}
-                  id={1}
-                  title={'매일 아침에 일기 쓰기'}
-                  include={32}
-                  d={1}
-                />
-                <NewRoom
-                  viewRoom={viewRoom}
-                  id={2}
-                  title={'하루 5분 명상하기'}
-                  include={32}
-                  d={1}
-                />
+
+              <NewRoom
+                viewRoom={viewRoom}
+                id={1}
+                title={'매일 아침에 일기 쓰기'}
+                include={32}
+                d={1}
+              />
+              <NewRoom
+                viewRoom={viewRoom}
+                id={2}
+                title={'하루 5분 명상하기'}
+                include={32}
+                d={1}
+              />
             </View>
             <Text
               style={{
@@ -240,41 +220,41 @@ export default function Rooms(props) {
               }}>
               습관모임
             </Text>
-              <Room
-                viewRoom={viewRoom}
-                id={1}
-                title={'매일 아침에 일기 쓰기'}
-                include={32}
-                d={1}
-              />
-              <Room
-                viewRoom={viewRoom}
-                id={2}
-                title={'하루 5분 명상하기'}
-                include={32}
-                d={1}
-              />
-              <Room
-                viewRoom={viewRoom}
-                id={3}
-                title={'하루 하나 캘리그라피'}
-                include={32}
-                d={1}
-              />
-              <Room
-                viewRoom={viewRoom}
-                id={4}
-                title={'약 먹기'}
-                include={32}
-                d={1}
-              />
-              <Room
-                viewRoom={viewRoom}
-                id={5}
-                title={'운동하기'}
-                include={32}
-                d={1}
-              />
+            <Room
+              viewRoom={viewRoom}
+              id={1}
+              title={'매일 아침에 일기 쓰기'}
+              include={32}
+              d={1}
+            />
+            <Room
+              viewRoom={viewRoom}
+              id={2}
+              title={'하루 5분 명상하기'}
+              include={32}
+              d={1}
+            />
+            <Room
+              viewRoom={viewRoom}
+              id={3}
+              title={'하루 하나 캘리그라피'}
+              include={32}
+              d={1}
+            />
+            <Room
+              viewRoom={viewRoom}
+              id={4}
+              title={'약 먹기'}
+              include={32}
+              d={1}
+            />
+            <Room
+              viewRoom={viewRoom}
+              id={5}
+              title={'운동하기'}
+              include={32}
+              d={1}
+            />
           </View>
         </View>
       </ScrollView>
@@ -295,18 +275,19 @@ const styles = StyleSheet.create({
     width: '100%',
     zIndex: 2,
     backgroundColor: 'white',
+    height : "100%"
   },
   room: {
-    backgroundColor : '#ffffff',
+    backgroundColor: '#ffffff',
     marginVertical: 8,
     marginHorizontal: 15,
     borderRadius: 10,
     padding: 15,
     flexDirection: 'row',
-    elevation : 2,
+    elevation: 2,
   },
   newroom: {
-    backgroundColor : '#7D63EB',
+    backgroundColor: '#7D63EB',
     borderWidth: 1,
     borderColor: '#000000A0',
     marginVertical: 8,
@@ -314,6 +295,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 15,
     flexDirection: 'row',
+    height: 94,
   },
   roomInfo: {
     width: 240,
@@ -325,8 +307,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     color: 'white',
     paddingHorizontal: 8,
-    fontSize : 12,
-    textAlign : 'center'
+    fontSize: 12,
+    textAlign: 'center',
   },
   newdday: {
     backgroundColor: '#ffffff',
@@ -335,47 +317,48 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     color: '#7D63EB',
     paddingHorizontal: 8,
-    fontSize : 12,
-    textAlign : 'center'
+    fontSize: 12,
+    textAlign: 'center',
   },
   dday2: {
-    fontWeight : '700',
+    fontWeight: '700',
     backgroundColor: '#7d63e8',
     borderRadius: 100,
     color: 'white',
     marginTop: 160,
     marginBottom: 10,
     zIndex: 3,
-    paddingHorizontal : 10,
-    paddingVertical : 5,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
   },
   title: {
-    fontWeight: '900',
+    fontWeight: '700',
     color: 'black',
     marginTop: 10,
     marginLeft: 10,
-    fontSize: 15,
+    fontSize: 16,
+    marginVertical: 8,
   },
   newtitle: {
-    fontWeight: '900',
+    fontWeight: '700',
     color: 'white',
-    marginTop: 10,
     marginLeft: 10,
-    fontSize: 15,
+    fontSize: 16,
+    marginVertical: 8,
   },
   subtitle: {
     fontSize: 13,
-    fontWeight : '400',
+    fontWeight: '500',
     marginLeft: 10,
-    marginTop : 5,
-    color : 'black'
+    marginTop: 5,
+    color: 'black',
   },
   newsubtitle: {
     fontSize: 13,
-    fontWeight : '400',
+    fontWeight: '500',
     marginLeft: 10,
-    marginTop : 5,
-    color : 'white'
+    marginTop: 5,
+    color: 'white',
   },
   sort: {
     marginLeft: 250,
@@ -454,7 +437,7 @@ const styles = StyleSheet.create({
     width: '100%',
     resizeMode: 'stretch',
     zIndex: 2,
-    top : -40,
+    top: -40,
   },
   subDiv2: {
     width: '100%',
