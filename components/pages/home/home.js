@@ -188,13 +188,14 @@ export default function Footer(props, isTogether) {
 }
 const styles = StyleSheet.create({
   article: {
+    backgroundColor : '#ffffff',
     paddingHorizontal: 24,
     justifyContent: 'center',
     flex: 5,
   },
   date: {
     textAlign: 'center',
-    fontWeight: '900',
+    fontWeight: '700',
     fontSize: 20,
     color: 'black',
     paddingTop: 15,
@@ -205,13 +206,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     backgroundColor: '#F3F3F3',
     paddingHorizontal: 30,
-    paddingVertical: 5,
+    height : 30,
+    justifyContent : 'center'
   },
   wiseTxt: {
     color: '#000000',
-    fontSize: 12,
+    fontSize: 13,
     textAlign: 'center',
-    fontWeight: '700',
+    fontWeight: '500',
   },
   footerIcon: {
     marginTop: 30,
