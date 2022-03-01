@@ -67,18 +67,23 @@ function Hobby(props) {
   function joinComplete() {
     fetch('http://193.123.253.133:5000/users', {
       method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify({
         age: props.age,
         gender: props.gender,
         iconId: props.iconId,
         id: props.email,
-        interestCategoryList: props.gender,
+        interestCategoryList: ["ECONOMY"],
         name: props.name,
-        password: props.password,
+        password: props.pswd,
       }),
     })
       .then(response => response.json())
       .then(response => {
+        console.log(response);
+        console.log(props);
         setComplete(true);
       });
     // setComplete(true)
@@ -273,6 +278,7 @@ function ForgotPW(props) {
     })
       .then(response => response.json())
       .then(response => {
+        console.log(response);
         props.setForgotPW(false);
       });
     // props.setForgotPW(false);
@@ -689,6 +695,7 @@ function Join(props) {
           if (!response) {
             setWarn('이메일이 중복됩니다.');
           }
+          console.log(response);
         });
       setIcon(true);
     }
@@ -826,14 +833,13 @@ export default function Login(props) {
     })
       .then(response => response.json())
       .then(response => {
-        console.log(response);
+        
         if (response.id == email) {
           props.setId(email);
           props.setApp('home');
         }
-        props.setApp('home');
+        console.log(response);
       });
-    props.setApp("home")
   }
 
   return (
