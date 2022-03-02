@@ -32,10 +32,11 @@ const styles = StyleSheet.create({
   },
   title:{
     fontWeight: '700',
-    fontSize: 25,
+    fontSize: 22,
     justifyContent: 'center',
     textAlign: 'center',
-    color: 'white'
+    color: 'white',
+    top : -20,
   },
   preBtn:{
     position: 'absolute',
@@ -45,7 +46,7 @@ const styles = StyleSheet.create({
   headerIcon: {
     position: 'absolute',
     width: '120%',
-    height: 120,
-    marginTop:-20
+    resizeMode : 'stretch',
+    top : -20,
   },
 });

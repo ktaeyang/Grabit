@@ -55,7 +55,7 @@ const App = () => {
   }, []);
   return (
     <SafeAreaView style = {{flex : 1}}>
-      <View style = {{flex : 0.93}}>
+      <View style = {{flex : 0.923}}>
       {
         app === "mypage" ?
         <Mypage setApp={setApp} email={id} /> :
