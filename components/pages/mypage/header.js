@@ -12,20 +12,29 @@ import {
 } from 'react-native';
 
 function Title(props) {
-  if (props.props.profileEdit) {
-    return <Text>프로필 수정</Text>;
-  } else if (props.props.official) {
-    return <Text>공지사항</Text>;
-  } else if (props.props.service) {
-    return <Text>고객센터</Text>;
-  } else if (props.props.logout) {
-    return <Text>로그아웃/회원탈퇴</Text>;
-  } else if (props.props.service1) {
-    return <Text>개인정보 처리방침</Text>;
-  } else if (props.props.service2) {
-    return <Text>서비스 이용약관</Text>;
-  }
-  return <Text>마이페이지</Text>;
+  useEffect(()=>{console.log(props)})
+  return (
+    
+    <>
+      {props.props.profileEdit ? (
+        <Text>프로필 수정</Text>
+      ) : props.props.official ? (
+        <Text>공지사항</Text>
+      ) : (props.props.service & !props.props.priInfo & !props.props.serviceTxt & !props.props.quesEmail) ? (
+        <Text>고객센터</Text>
+      ) : (props.props.service & props.props.priInfo) ? (
+        <Text>개인정보 처리방침</Text>
+      ) : (props.props.service & props.props.serviceTxt) ? (
+        <Text>서비스 이용약관</Text>
+      ) : (props.props.service & props.props.quesEmail) ? (
+        <Text>이메일 문의</Text>
+      ) : props.props.logout ? (
+        <Text>로그아웃/회원탈퇴</Text>
+      ) : (
+        <Text>마이페이지</Text>
+      )}
+    </>
+  );
 }
 
 function PreBtn(props) {
@@ -55,13 +64,14 @@ function PreBtn(props) {
         />
       </TouchableOpacity>
     );
-  } else if (props.props.service) {
+  } else if (props.props.service & !props.props.priInfo & !props.props.serviceTxt  & !props.props.quesEmail) {
     return (
       <TouchableOpacity
         activeOpacity={1}
         onPress={() => {
-          {props.props.setService(false);
-          console.log('고객센터탭')}
+          {
+            props.props.setService(false);
+          }
         }}>
         <Image
           style={styles.preBtn}
@@ -69,25 +79,41 @@ function PreBtn(props) {
         />
       </TouchableOpacity>
     );
-  } else if (props.props.service1) {
+  } else if (props.props.service & props.props.priInfo) {
     return (
       <TouchableOpacity
         activeOpacity={1}
-        onPress={() => {
-          props.props.SetService1(false);
+        onPress={async() => {
+          props.props.setService(true);
+          await props.props.setPriInfo(false);
         }}>
         <Image
-          style={styles.preBtn}
+          style={styles.preBtn2}
           source={require('../../../image/preBtn.png')}
         />
       </TouchableOpacity>
     );
-  } else if (props.props.service2) {
+  } else if (props.props.service & props.props.serviceTxt) {
     return (
       <TouchableOpacity
         activeOpacity={1}
-        onPress={() => {
-          props.props.SetService2(false);
+        onPress={async() => {
+          props.props.setService(true);
+          await props.props.setServiceTxt(false);
+        }}>
+        <Image
+          style={styles.preBtn2}
+          source={require('../../../image/preBtn.png')}
+        />
+      </TouchableOpacity>
+    );
+  } else if (props.props.service & props.props.quesEmail) {
+    return (
+      <TouchableOpacity
+        activeOpacity={1}
+        onPress={async() => {
+          props.props.setService(true);
+          await props.props.setQuesEmail(false);
         }}>
         <Image
           style={styles.preBtn}

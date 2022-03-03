@@ -24,19 +24,22 @@ const App = props => {
   const [profileEdit, setProfileEdit] = useState(false);
   const [official, setOfficial] = useState(false);
   const [service, setService] = useState(false);
-  const [service1, SetService1] = useState(false);
-  const [service2, SetService2] = useState(false);
   const [logout, setLogout] = useState(false);
+  const [priInfo, setPriInfo] = useState(false);
+  const [serviceTxt, setServiceTxt] = useState(false);
+  const [quesEmail, setQuesEmail] = useState(false);
 
   return (
     <View>
       <Header
         service={service}
-        service1={service1}
-        service2={service2}
         setService={setService}
-        SetService1={SetService1}
-        SetService2={SetService2}
+        priInfo={priInfo}
+        serviceTxt={serviceTxt}
+        quesEmail={quesEmail}
+        setPriInfo={setPriInfo}
+        setServiceTxt={setServiceTxt}
+        setQuesEmail={setQuesEmail}
         logout={logout}
         setLogout={setLogout}
         profileEdit={profileEdit}
@@ -46,19 +49,20 @@ const App = props => {
       />
       <Article
         service={service}
-        service1={service1}
-        service2={service2}
         setApp={props.setApp}
         setService={setService}
-        SetService1={SetService1}
-        SetService2={SetService2}
+        priInfo={priInfo}
+        serviceTxt={serviceTxt}
+        quesEmail={quesEmail}
+        setPriInfo={setPriInfo}
+        setServiceTxt={setServiceTxt}
+        setQuesEmail={setQuesEmail}
         logout={logout}
         setLogout={setLogout}
         profileEdit={profileEdit}
         setProfileEdit={setProfileEdit}
         official={official}
         setOfficial={setOfficial}
-
       />
     </View>
   );
