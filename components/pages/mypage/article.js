@@ -249,19 +249,13 @@ function AddNotices() {
   }).then(response => console.log(response));
 }
 function Service(props) {
-  const [priInfo, SetPriInfo] = useState(false);
-  const [serviceTxt, SetServiceTxt] = useState(false);
-  const [quesEmail, SetQuesEmail] = useState(false);
-
   return (
     <View style={styles.subDivNotice}>
       <View style={styles.helplist}>
         <TouchableOpacity
           activeOpacity={1}
           onPress={() => {
-            SetPriInfo(true);
-            props.SetService1(true);
-            
+            props.setPriInfo(true);
           }}
           style={styles.listone}>
           <Text style={styles.mypagelist}>개인정보처리 방침</Text>
@@ -273,8 +267,7 @@ function Service(props) {
         <TouchableOpacity
           activeOpacity={1}
           onPress={() => {
-            SetServiceTxt(true);
-            props.SetService2(true);
+            props.setServiceTxt(true);
           }}
           style={styles.listone}>
           <Text style={styles.mypagelist}>서비스 이용약관</Text>
@@ -285,7 +278,9 @@ function Service(props) {
         </TouchableOpacity>
         <TouchableOpacity
           activeOpacity={1}
-          onPress={() => SetQuesEmail(true)}
+          onPress={() => {
+            props.setQuesEmail(true);
+          }}
           style={styles.listone}>
           <Text style={styles.mypagelist}>이메일 문의</Text>
           <Image
@@ -294,13 +289,13 @@ function Service(props) {
           />
         </TouchableOpacity>
       </View>
-      {priInfo && <PriInfo />}
-      {serviceTxt && <ServiceTxt setService={props.setService} SetService1={props.SetService1} SetService2={props.SetService2}/>}
-      {quesEmail && <QuesEmail />}
+      {props.priInfo && <PriInfo setService={props.setService} />}
+      {props.serviceTxt && <ServiceTxt setService={props.setService} />}
+      {props.quesEmail && <QuesEmail setService={props.setService} />}
     </View>
   );
 }
-function PriInfo(props) {
+function PriInfo() {
   return (
     <ScrollView style={styles.helpContainer}>
       <Text style={styles.txtHeader}> 제 1조(목적)</Text>
@@ -309,11 +304,10 @@ function PriInfo(props) {
   );
 }
 // 서비스 이용약관
-function ServiceTxt(props) {
+function ServiceTxt() {
   return (
     <View style={styles.helpContainer}>
       <ScrollView>
-        <TouchableOpacity><Text>나를 눌러줘</Text></TouchableOpacity>
         <Text style={styles.txtHeader}> 제 1조 (목적)</Text>
         <Text style={styles.txtBody}>
           {`본 약관(이하 "약관")은 개발팀 ‘HABEAT’가 개발한 그래빗(Grabit)에서 제공하는 그래빗(Grabit) 어플리케이션 서비스(이하”서비스”) 내에서 회원의 습관개선을 위한 개인습관, 단체습관모임 개설 및 참여, 진행 방식과 관련하여 “HABEAT”와 “회원”의 권리, 의무 및 책임사항, 기타 필요한 사항을 규정함을 목적으로 합니다.`}
@@ -338,7 +332,6 @@ function ServiceTxt(props) {
 4. 약관의 효력이 발생된 날로부터 14일 이후까지 거부의사를 표시하지 아니하고 서비스를 계속 사용할 경우는 약관에 동의한 것으로 간주됩니다.
 5. “회원”이 개정약관의 적용에 동의하지 않는 경우 “개발팀” 또는 “회원”은 이용계약을 해지할 수 있습니다.`}
         </Text>
-
         <Text style={styles.txtHeader}> 제 4조 (약관의 명시와 개정)</Text>
         <Text style={styles.txtBody}>
           {`본 약관에서 정하지 않은 사항이나 해석에 대하여는 관련 법령 또는 상관례에 따릅니다.
@@ -346,7 +339,7 @@ function ServiceTxt(props) {
 2. “개발팀”은 개별 서비스에 대해 별도의 이용약관 또는 정책(이하 “별도 약관”)을 둘 수 있으며, 그 내용이 본 약관과 충돌하는 경우 “별도 약관”이 우선하여 적용됩니다.
 3. "회원"이 개정된 약관의 적용에 대하여 동의하지 않는 경우 "개발팀" 또는 "회원"은 "서비스" 이용계약을 해지할 수 있습니다.`}
         </Text>
-        <Text style={styles.txtHeader}>제 5조 (이용계약의 체결 및 거절).</Text>
+        <Text style={styles.txtHeader}>제 5조 (이용계약의 체결 및 거절)</Text>
         <Text style={styles.txtBody}>
           {`
 1. “서비스”의 이용계약은 회원이 되고자 하는 자(이하 “가입신청자”)가 본 약관에 동의하고 가입을 신청한 다음 개발팀이 이를 수락함으로써 체결됩니다. 필요한 경우 개발팀은 본인 확인 기관을 통한 실명확인 및 본인인증을 요청할 수 있습니다.
@@ -363,7 +356,6 @@ function ServiceTxt(props) {
 06. “개발팀”은 “회원”에게 “개발팀”의 “서비스”에 대한 다양하고 유익한 정보를 "서비스" 화면, 홈페이지, LMS/SMS, 알림 메시지(Push Notification), 이메일등을 통하여 제공할 수 있습니다. 단 회원이 위 열거한 정보제공 방법 중 그 수신방법을 거부하는 의사표시를 한 경우 예외로 합니다.`}
         </Text>
         <Text style={styles.txtHeader}>
-          {' '}
           제 6조 (개발팀의 이용계약 해지 및 제한)
         </Text>
         <Text style={styles.txtBody}>
@@ -536,7 +528,6 @@ function ServiceTxt(props) {
 3. 해외에 주소나 거소가 있는 회원의 경우 개발팀과 회원간 발생한 분쟁에 관한 소송은 전항에도 불구하고 대한민국 서울중앙지방법원을 관할 법원으로 합니다.`}
         </Text>
         <Text style={styles.txtHeader}>
-          {' '}
           {`공고일자 : 2021년 12월 20일
  시행일자 : 2021년 12월 20일
 
@@ -546,8 +537,13 @@ function ServiceTxt(props) {
     </View>
   );
 }
-function QuesEmail(props) {
-  return <View></View>;
+function QuesEmail() {
+  return (
+    <View style={styles.quesEmail}>
+      <Image source={require('../../../image/Email2.png')} />
+      <Text style={styles.txtEmail}> officialhabeat@gmail.com</Text>
+    </View>
+  );
 }
 function Logout2(props) {
   return (
@@ -806,9 +802,13 @@ export default function Footer(props) {
       {props.official ? <Official /> : undefined}
       {props.service ? (
         <Service
-          SetService1={props.SetService1}
-          SetService2={props.SetService2}
           setService={props.setService}
+          setPriInfo={props.setPriInfo}
+          setServiceTxt={props.setServiceTxt}
+          priInfo={props.priInfo}
+          serviceTxt={props.serviceTxt}
+          quesEmail={props.quesEmail}
+          setQuesEmail={props.setQuesEmail}
         />
       ) : undefined}
       {props.logout ? (
@@ -1162,10 +1162,28 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: '#f5f5f5',
   },
+  txtEmail: {
+    fontSize: 18,
+    color: '#7D63EB',
+    fontWeight: '400',
+    marginVertical: 20,
+    padding: 10,
+    textDecorationLine: 'underline',
+  },
   helpContainer: {
     position: 'absolute',
     width: '100%',
     backgroundColor: 'white',
     height: 550,
+  },
+  quesEmail: {
+    alignItems : 'center',
+    position: 'absolute',
+    width: '100%',
+    backgroundColor: 'white',
+    height: 550,
+    justifyContent : 'center',
+    flexDirection : 'row',
+    top : -50,
   },
 });
