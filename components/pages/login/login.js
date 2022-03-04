@@ -67,30 +67,29 @@ function Hobby(props) {
   function joinComplete() {
     fetch('http://193.123.253.133:5000/users', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
         age: props.age,
         gender: props.gender,
         iconId: props.iconId,
         id: props.email,
-        interestCategoryList: ["ECONOMY"],
+        interestCategoryList: ['ECONOMY'],
         name: props.name,
         password: props.pswd,
       }),
     })
-      .then(response => response.json())
       .then(response => {
-        console.log(response);
-        console.log(props);
-        setComplete(true);
-      });
-    // setComplete(true)
+        return response.json();
+      })
+      .then(data => {
+        console.log(data);
+        //setComplete(true);
+      })
+      .catch(error => console.log(error));
   }
   return (
     <View style={styles.subDiv2}>
-      <Text style={[styles.addTitle, {marginTop: 40}]}>관심 분야를</Text>
+      <Text style={[styles.addTitle, {marginTop: 10}]}>관심 분야를</Text>
       <Text style={[styles.addTitle, {marginBottom: 40}]}>선택해 주세요!</Text>
       <View style={[styles.category, {marginTop: 80}]}>
         <TouchableOpacity
@@ -152,7 +151,7 @@ function Icon(props) {
   return (
     <View style={styles.subDiv2}>
       <Text
-        style={{marginTop: 40, marginLeft: 40, fontSize: 20, color: 'black'}}>
+        style={{marginTop: 10, marginLeft: 40, fontSize: 20, color: 'black'}}>
         프로필로 사용할
       </Text>
       <Text style={{marginLeft: 40, fontSize: 20, color: 'black'}}>
@@ -256,7 +255,7 @@ function Icon(props) {
           gender={props.gender}
           email={props.email}
           name={props.name}
-          password={props.pswd}
+          pswd={props.pswd}
           setHobby={setHobby}
           iconId={icon}
           setApp={props.setApp}
@@ -684,20 +683,16 @@ function Join(props) {
     } else if (!isSelected) {
       setWarn('이용약관에 동의하지 않으시면 가입이 제한됩니다.');
     } else {
-      fetch('http://193.123.253.133:5000/users/' + name + '/exist', {
-        method: 'GET',
-        body: JSON.stringify({
-          userId: name,
-        }),
-      })
-        .then(response => response.json())
+      fetch('http://193.123.253.133:5000/users/' + email + '/exist')
         .then(response => {
-          if (!response) {
+          return response.json();
+        })
+        .then(data => {
+          if (data) {
             setWarn('이메일이 중복됩니다.');
-          }
-          console.log(response);
-        });
-      setIcon(true);
+          } else setIcon(true);
+        })
+        .catch(error => console.log(error));
     }
   }
 
@@ -805,7 +800,7 @@ function Join(props) {
           gender={gender ? 'MALE' : 'FEMALE'}
           email={email}
           name={name}
-          password={pswd}
+          pswd={pswd}
           setIcon={setIcon}
           setApp={props.setApp}
         />
@@ -832,13 +827,16 @@ export default function Login(props) {
       },
     })
       .then(response => response.json())
-      .then(response => {
-        
-        if (response.id == email) {
+      .then(data => {
+        if (data.id === email) {
           props.setId(email);
-          props.setApp('home');
+          props.setName(props.name);
+          props.setApp('home'); // 서버에러 해결되면 지우기
+          if (data.key === pswd) {
+            // props.setApp('home'); // 서버에러있어서 잠깐 주석처리
+          }
         }
-        console.log(response);
+        console.log(data);
       });
   }
 

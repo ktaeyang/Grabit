@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -28,7 +28,6 @@ const App = props => {
   const [priInfo, setPriInfo] = useState(false);
   const [serviceTxt, setServiceTxt] = useState(false);
   const [quesEmail, setQuesEmail] = useState(false);
-
   return (
     <View>
       <Header
@@ -63,6 +62,7 @@ const App = props => {
         setProfileEdit={setProfileEdit}
         official={official}
         setOfficial={setOfficial}
+        id = {props.email}
       />
     </View>
   );

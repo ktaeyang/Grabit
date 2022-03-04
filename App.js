@@ -34,6 +34,7 @@ import Footer from "./components/footer";
 const App = () => {
   const [app, setApp] = useState("start");
   const [id, setId] = useState(null);
+  const [name, setName] = useState('');
   useEffect(() => {
     const backAction = () => {
       Alert.alert("grabit", "OK 버튼을 누르시면 앱이 종료됩니다.", [
@@ -53,12 +54,13 @@ const App = () => {
 
     return () => backHandler.remove();
   }, []);
+  
   return (
     <SafeAreaView style = {{flex : 1}}>
       <View style = {{flex : 0.923}}>
       {
         app === "mypage" ?
-        <Mypage setApp={setApp} email={id} /> :
+        <Mypage setApp={setApp} email={id} name={name}/> :
         app.indexOf("add",0) == 0 ?
         <Add app={app} setApp={setApp} email={id} /> :
         app === "mychallenge" ?
@@ -70,7 +72,7 @@ const App = () => {
         app === "manual" ?
         <Manual setApp={setApp} email={id} /> :
         app === "login" ?
-        <Login setApp={setApp} setId={setId} /> :
+        <Login setApp={setApp} setId={setId} setName={setName} /> :
         <Home app={app} setApp={setApp}/>
       }
       </View>

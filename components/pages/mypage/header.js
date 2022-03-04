@@ -12,7 +12,6 @@ import {
 } from 'react-native';
 
 function Title(props) {
-  useEffect(()=>{console.log(props)})
   return (
     
     <>

@@ -76,7 +76,7 @@ function Oneroom(props) {
           })}
         </View>
       </View>
-      <View style = {{}}>
+      <View style={{}}>
         <TouchableOpacity
           onPress={() => props.viewRoom(null)}
           style={styles.purpleBtn2}>
@@ -106,6 +106,13 @@ function Room(props) {
 }
 
 function NewRoom(props) {
+  useEffect(() => {
+    fetch(`http://193.123.253.133:5000/users/${props.id}/challenges/1`)
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch(error => {console.log(error)})
+    console.log(props);
+  });
   return (
     <TouchableOpacity
       onPress={() => props.viewRoom(props.id)}
@@ -158,15 +165,6 @@ export default function Rooms(props) {
 
           <View>
             <View style={styles.category}>
-              {/* <RNPickerSelect style={{width: 70}} onValueChange={(value) => setCategory(value)}
-                    items={[
-                        { label: '건강습관', value: "HEALTH" },
-                        { label: '생활습관', value: "LIFE" },
-                        { label: '성장습관', value: "GROW" },
-                        { label: '경제습관', value: "ECONOMY" },
-                        { label: '나를 위한 습관', value: "FOR_ME" },
-                    ]}
-                    /> */}
               <TextInput
                 style={styles.addHabitTxt}
                 placeholder={''}
@@ -199,13 +197,6 @@ export default function Rooms(props) {
                 viewRoom={viewRoom}
                 id={1}
                 title={'매일 아침에 일기 쓰기'}
-                include={32}
-                d={1}
-              />
-              <NewRoom
-                viewRoom={viewRoom}
-                id={2}
-                title={'하루 5분 명상하기'}
                 include={32}
                 d={1}
               />
@@ -275,7 +266,7 @@ const styles = StyleSheet.create({
     width: '100%',
     zIndex: 2,
     backgroundColor: 'white',
-    height : "100%"
+    height: '100%',
   },
   room: {
     backgroundColor: '#ffffff',

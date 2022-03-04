@@ -307,7 +307,7 @@ function PriInfo() {
 function ServiceTxt() {
   return (
     <View style={styles.helpContainer}>
-      <ScrollView>
+      <ScrollView style={{flex: 1}}>
         <Text style={styles.txtHeader}> 제 1조 (목적)</Text>
         <Text style={styles.txtBody}>
           {`본 약관(이하 "약관")은 개발팀 ‘HABEAT’가 개발한 그래빗(Grabit)에서 제공하는 그래빗(Grabit) 어플리케이션 서비스(이하”서비스”) 내에서 회원의 습관개선을 위한 개인습관, 단체습관모임 개설 및 참여, 진행 방식과 관련하여 “HABEAT”와 “회원”의 권리, 의무 및 책임사항, 기타 필요한 사항을 규정함을 목적으로 합니다.`}
@@ -576,7 +576,7 @@ function Logout2(props) {
 function Signout2(props) {
   return (
     <Modal
-      isVisible={true}
+      isVisible={!props.visible}
       animationType="fade"
       statusBarTranslucent={true}
       transparent={true}>
@@ -602,10 +602,26 @@ function Signout2(props) {
 }
 
 function Signout3(props) {
+  useEffect(() => {
+    props.setVisible(true);
+
+    fetch('http://193.123.253.133:5000/users/' + props.id, {
+      method: 'DELETE',
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+      })
+      .catch(error => console.log(error));
+
+  });
   return (
-    <View style={[styles.subDiv]}>
-      <Image source={require('../../../image/signout.png')} />
-      <Text>탈퇴가 완료되었습니다.</Text>
+    <View style={styles.signout}>
+      <Image
+        style={{marginTop: 150}}
+        source={require('../../../image/signout.png')}
+      />
+      <Text style={styles.signoutTxt}>탈퇴가 완료되었습니다.</Text>
       <TouchableOpacity
         onPress={() => props.setApp('login')}
         style={[styles.prevBtn4, {borderColor: '#7D63EB'}]}>
@@ -620,19 +636,11 @@ function Signout3(props) {
 }
 
 function Signout(props) {
+  const [visible, setVisible] = useState(false);
   const [signout, setSignout] = useState(false);
   const [signout3, setSignout3] = useState(false);
 
-  function pleaseOut() {
-    fetch('http://193.123.253.133:5000/users/' + props.email, {
-      method: 'DELETE',
-    })
-      .then(response => response.json())
-      .then(response => {
-        setSignout(true);
-      });
-    //setSignout(true)
-  }
+  
   return (
     <View style={[styles.subDiv]}>
       <Image
@@ -651,7 +659,9 @@ function Signout(props) {
           style={styles.prevArrow3}
         />
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => pleaseOut()} style={styles.logoutBtn}>
+      <TouchableOpacity
+        onPress={() => setSignout(true)}
+        style={styles.logoutBtn}>
         <Text style={styles.logoutTxt}>회원 탈퇴하기</Text>
         <Image
           source={require('../../../image/nextArrow2.png')}
@@ -659,9 +669,15 @@ function Signout(props) {
         />
       </TouchableOpacity>
       {signout ? (
-        <Signout2 setSignout={setSignout} setSignout3={setSignout3} />
+        <Signout2
+          setSignout={setSignout}
+          setSignout3={setSignout3}
+          visible={visible}
+        />
       ) : undefined}
-      {signout3 ? <Signout3 setApp={props.setApp} /> : undefined}
+      {signout3 ? (
+        <Signout3 setApp={props.setApp} setVisible={setVisible} id={props.id}/>
+      ) : undefined}
     </View>
   );
 }
@@ -693,11 +709,7 @@ function Logout(props) {
         <Logout2 setLogout={setLogout} setApp={props.setApp} />
       ) : undefined}
       {signout ? (
-        <Signout
-          setSignout={setSignout}
-          email={props.email}
-          setApp={props.setApp}
-        />
+        <Signout setSignout={setSignout} id={props.id} setApp={props.setApp} />
       ) : undefined}
     </View>
   );
@@ -705,6 +717,20 @@ function Logout(props) {
 
 export default function Footer(props) {
   const [viewInvite, setViewInvite] = useState(false);
+
+  useEffect(() => {
+    fetch(`http://193.123.253.133:5000/users/${props.id}/profile`)
+      .then(res => {
+        return res.json();
+      })
+      .then(data => {
+        console.log(data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  });
+
   return (
     <ScrollView style={styles.article}>
       <View
@@ -723,7 +749,7 @@ export default function Footer(props) {
           style={styles.profile}
           source={require('../../../image/userbaseIcon.png')}
         />
-        <Text style={styles.profileName}>성장하는 김OO님</Text>
+        <Text style={styles.profileName}>성장하는 {props.name}님</Text>
       </View>
       <View style={styles.challengeList}>
         <View style={styles.challenges}>
@@ -812,7 +838,7 @@ export default function Footer(props) {
         />
       ) : undefined}
       {props.logout ? (
-        <Logout setApp={props.setApp} email={props.email} />
+        <Logout setApp={props.setApp} id={props.id} />
       ) : undefined}
     </ScrollView>
   );
@@ -820,11 +846,11 @@ export default function Footer(props) {
 
 const styles = StyleSheet.create({
   article: {
-    height: 1500,
+    height: 500,
     backgroundColor: 'white',
   },
   subDiv: {
-    height: 2000,
+    height: 1500,
     backgroundColor: 'white',
     position: 'absolute',
     width: '100%',
@@ -894,7 +920,7 @@ const styles = StyleSheet.create({
   },
   mylist: {
     backgroundColor: '#fafafa',
-    height: 1000,
+    height: 300,
   },
   helplist: {
     backgroundColor: '#ffffff',
@@ -1177,13 +1203,27 @@ const styles = StyleSheet.create({
     height: 550,
   },
   quesEmail: {
-    alignItems : 'center',
+    alignItems: 'center',
     position: 'absolute',
     width: '100%',
     backgroundColor: 'white',
     height: 550,
-    justifyContent : 'center',
-    flexDirection : 'row',
-    top : -50,
+    justifyContent: 'center',
+    flexDirection: 'row',
+    top: -50,
+  },
+  signout: {
+    height: 1500,
+    backgroundColor: 'white',
+    position: 'absolute',
+    width: '100%',
+    elevation: 6,
+    alignItems: 'center',
+  },
+  signoutTxt: {
+    marginVertical: 30,
+    fontWeight: 'bold',
+    fontSize: 16,
+    color: 'black',
   },
 });

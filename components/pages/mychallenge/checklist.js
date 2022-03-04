@@ -148,18 +148,6 @@ export default function CheckList(props) {
           challenge={9}
           week={true}
         />
-        <Check
-          viewEachHabit={props.viewEachHabit}
-          id={4}
-          checked={false}
-          setChk={setCh1}
-          title={'독일어 공부하기'}
-          done={0}
-          isTogether={true}
-          whole={0}
-          challenge={3}
-          week={false}
-        />
       </ScrollView>
     </View>
   );
