@@ -19,7 +19,7 @@ import {loginImages} from '../../src/images';
 
 function CompleteJoin(props) {
   return (
-    <View style={styles.subDiv2}>
+    <Container>
       <Image
         style={[styles.checkImg, {marginTop: 200}]}
         source={
@@ -57,7 +57,7 @@ function CompleteJoin(props) {
         style={styles.purpleBtn}>
         <Text style={styles.purpleBtnTxt}>습관 모임 만들기</Text>
       </TouchableOpacity>
-    </View>
+    </Container>
   );
 }
 
@@ -289,7 +289,7 @@ function ForgotPW(props) {
   }
 
   return (
-    <View style={styles.subDiv}>
+    <Container>
       <Text
         style={{
           textAlign: 'center',
@@ -323,13 +323,13 @@ function ForgotPW(props) {
         style={styles.purpleBtn}>
         <Text style={styles.purpleBtnTxt}>계속하기</Text>
       </TouchableOpacity>
-    </View>
+    </Container>
   );
 }
 
 function UserPromise(props) {
   return (
-    <View style={styles.subDiv}>
+    <Container>
       <StatusBar
         animated={true}
         backgroundColor="#ffffff"
@@ -383,7 +383,7 @@ function UserPromise(props) {
         </ScrollView>
       </View>
       <Text style={{marginTop: 20, marginLeft: 20}}>개인정보 이용방침</Text>
-    </View>
+    </Container>
   );
 }
 
@@ -428,48 +428,40 @@ function Join(props) {
   }
 
   return (
-    <View style={styles.subDiv}>
+    <Container>
       <Text style={styles.loginTxt3}>회원가입</Text>
       <Text style={styles.loginTxt4}>
         아이디를 만들어 그래빗을 시작해보세요!
       </Text>
-      <View>
-        <Image
-          style={styles.icon}
-          source={require('../../../image/user.png')}
-        />
+      <LoginInputContainer>
+        <LoginIconImg source={loginImages.user} />
         <TextInput
           placeholder="이름(실명 입력)"
-          style={styles.textName}
+          style={{marginLeft: 35}}
           value={name}
           onChangeText={text => setName(text)}
         />
-      </View>
-      <View>
-        <Image
-          style={styles.icon}
-          source={require('../../../image/email.png')}
-        />
+      </LoginInputContainer>
+
+      <LoginInputContainer>
+        <LoginIconImg source={loginImages.email} />
         <TextInput
           placeholder="이메일"
-          style={styles.textName}
+          style={{marginLeft: 35}}
           value={email}
           onChangeText={text => setEmail(text)}
         />
-      </View>
-      <View>
-        <Image
-          style={styles.icon}
-          source={require('../../../image/pswd.png')}
-        />
+      </LoginInputContainer>
+      <LoginInputContainer>
+        <LoginIconImg source={loginImages.pswd} />
         <TextInput
           placeholder="비밀번호"
-          style={styles.textName}
+          style={{marginLeft: 35}}
           value={pswd}
           secureTextEntry={true}
           onChangeText={text => setPswd(text)}
         />
-      </View>
+      </LoginInputContainer>
       <View style={{flexDirection: 'row', marginHorizontal: 20}}>
         <TouchableOpacity
           style={gender ? styles.thisGender : styles.noGender}
@@ -538,7 +530,7 @@ function Join(props) {
           setApp={props.setApp}
         />
       ) : undefined}
-    </View>
+    </Container>
   );
 }
 
@@ -573,7 +565,7 @@ export default function Login(props) {
   }
 
   return (
-    <LoginContainer>
+    <Container>
       <StatusBar
         animated={true}
         backgroundColor={`${colors.white}`}
@@ -616,15 +608,16 @@ export default function Login(props) {
       </Text>
       {forgotPW ? <ForgotPW setForgotPW={setForgotPW} /> : undefined}
       {join ? <Join setJoin={setJoin} setApp={props.setApp} /> : undefined}
-    </LoginContainer>
+    </Container>
   );
 }
 const height = Dimensions.get('screen').height;
 const width = Dimensions.get('screen').width;
-const LoginContainer = styled.View`
+const Container = styled.View`
   width: ${width}px;
   height: ${height}px;
   background-color: ${colors.white};
+  position: absolute;
 `;
 const LoginHeaderTxt = styled.Text`
   font-size: 25px;
@@ -651,13 +644,6 @@ const LoginInputContainer = styled.View`
   margin-right: 20px;
 `;
 const styles = StyleSheet.create({
-  subDiv: {
-    width: '100%',
-    height: 1000,
-    position: 'absolute',
-    backgroundColor: 'white',
-    zIndex: 2,
-  },
   subDiv2: {
     width: '100%',
     height: 1000,

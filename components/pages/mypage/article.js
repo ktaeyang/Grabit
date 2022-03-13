@@ -210,31 +210,32 @@ function OfficialList(props) {
 }
 
 function Official() {
-  const [official, setOfficial] = useState(undefined);
-  fetch('http://193.123.253.133:5000/board/notices', {
-    method: 'GET',
-  })
-    .then(response => response.json())
-    .then(response => {
-      response.map((el, key) => {
-        <OfficialList date={el.date} title={el.subject} content={el.content} />;
+  const [official, setOfficial] = useState([{
+    content: '',
+    date: '',
+    id: '',
+    subject: '',
+  }]);
+  useEffect(() => {
+    fetch('http://193.123.253.133:5000/board/notices')
+      .then(response => response.json())
+      .then(data => {
+        setOfficial(data);
       });
-      setOfficial(official);
-      console.log(response);
-    });
+  }, []);
+
   return (
     <View style={[styles.subDiv, styles.officialDiv]}>
-      {official}
-      <OfficialList
-        date={'09.11'}
-        title={'공지사항 제목'}
-        content={'공지사항 내용을 입력해 주세요.'}
-      />
-      <TouchableOpacity
-        style={{margin: 20, borderWidth: 2}}
-        onPress={AddNotices}>
-        <Text>공지사항 생성 테스트</Text>
-      </TouchableOpacity>
+      {official.map((notice, i) => {
+        return (
+          <OfficialList
+            content={notice.content}
+            date={notice.date}
+            title={notice.subject}
+            id = {i}
+          />
+        );
+      })}
     </View>
   );
 }
@@ -308,7 +309,7 @@ function PriInfo() {
 // 서비스 이용약관
 function ServiceTxt() {
   return (
-    <ScrollView style={styles.helpContainer} nestedScrollEnabled = {true}>
+    <ScrollView style={styles.helpContainer} nestedScrollEnabled={true}>
       <View>
         {GrabitTerms.map(content => {
           return (
@@ -515,7 +516,7 @@ export default function Footer(props) {
   });
 
   return (
-    <ScrollView style={styles.article}  nestedScrollEnabled = {true}>
+    <ScrollView style={styles.article} nestedScrollEnabled={true}>
       <View
         style={{
           justifyContent: 'center',
@@ -644,7 +645,7 @@ export const width = ( // 가로 변환 작업
 
 const styles = StyleSheet.create({
   article: {
-    height: 500,
+    height: 600,
     backgroundColor: 'white',
     zIndex: 1,
   },
