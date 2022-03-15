@@ -83,12 +83,9 @@ function Hobby(props) {
         password: props.pswd,
       }),
     })
-      .then(response => {
-        return response.json();
-      })
       .then(data => {
         console.log(data);
-        //setComplete(true);
+        setComplete(true);
       })
       .catch(error => console.log(error));
   }

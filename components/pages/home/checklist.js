@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import PerImage from '../perImage';
 
+const url = "http://193.123.253.133:5000"
 function Check({
   checked,
   setComplete,
@@ -99,6 +100,31 @@ function Check({
 }
 
 export default function CheckList(props) {
+  const [official, setOfficial] = useState([
+    {
+      achievementDays: ['', ''],
+      achievementDaysCount: '',
+      challengeCategory: '',
+      completeChallenge: true,
+      endDate: '',
+      name: '',
+      period: 21,
+      progressChallenge: '',
+      scheduledChallenge: true,
+      startDate: '',
+    },
+  ]);
+  useEffect(() => {
+    fetch(
+      `${url}/users/${props.props.email}/challenges/progress`,
+    )
+      .then(response => response.json())
+      .then(data => {
+        setOfficial(data);
+        console.log(official);
+      })
+      .catch(err => console.log(err));
+  }, []);
   return (
     <View style={styles.checklist}>
       <ScrollView>

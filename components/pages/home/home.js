@@ -166,7 +166,7 @@ export default function Footer(props, isTogether) {
           </Text>
         </View>
         {!complete3Days && <WeekCalendar day={props.day} />}
-        <CheckList setComplete={setComplete} />
+        <CheckList setComplete={setComplete} props={props}/>
       </View>
       {complete ? (
         <Complete

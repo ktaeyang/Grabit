@@ -335,7 +335,7 @@ function Add3(props) {
     ].join('-');
   };
 
-  function addProject() {
+  function addProject(props) {
     fetch('http://193.123.253.133:5000/challenges', {
       method: 'POST',
       headers: {

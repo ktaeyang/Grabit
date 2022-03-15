@@ -11,6 +11,20 @@ import {
 } from 'react-native';
 import Modal from 'react-native-modal';
 import {GrabitTerms} from '../../json/terms';
+import colors from '../../src/colors';
+import styled from 'styled-components/native';
+
+export const basicDimensions = {
+  // 디자이너가 작업하고 있는 XD파일 스크린의 세로,가로
+  height: 812,
+  width: 375,
+};
+
+export const height = // 높이 변환 작업
+(Dimensions.get('screen').height * (1 / basicDimensions.height)).toFixed(2);
+
+export const width = // 가로 변환 작업
+(Dimensions.get('screen').width * (1 / basicDimensions.width)).toFixed(2);
 
 function ViewInvite(props) {
   return (
@@ -210,12 +224,14 @@ function OfficialList(props) {
 }
 
 function Official() {
-  const [official, setOfficial] = useState([{
-    content: '',
-    date: '',
-    id: '',
-    subject: '',
-  }]);
+  const [official, setOfficial] = useState([
+    {
+      content: '',
+      date: '',
+      id: '',
+      subject: '',
+    },
+  ]);
   useEffect(() => {
     fetch('http://193.123.253.133:5000/board/notices')
       .then(response => response.json())
@@ -225,20 +241,26 @@ function Official() {
   }, []);
 
   return (
-    <View style={[styles.subDiv, styles.officialDiv]}>
+    <OfficialContainer>
       {official.map((notice, i) => {
         return (
           <OfficialList
             content={notice.content}
             date={notice.date}
             title={notice.subject}
-            id = {i}
           />
         );
       })}
-    </View>
+    </OfficialContainer>
   );
 }
+const OfficialContainer = styled.View`
+  height: 1500px;
+  width: 100%;
+  background-color: ${colors.white};
+  position: absolute;
+`;
+
 function AddNotices() {
   fetch('http://193.123.253.133:5000/board/notice', {
     method: 'POST',
@@ -311,7 +333,7 @@ function ServiceTxt() {
   return (
     <ScrollView style={styles.helpContainer} nestedScrollEnabled={true}>
       <View>
-        {GrabitTerms.map(content => {
+        {GrabitTerms.map((content, i) => {
           return (
             <View>
               <Text style={styles.txtHeader}> {content.head}</Text>
@@ -501,13 +523,14 @@ function Logout(props) {
 
 export default function Footer(props) {
   const [viewInvite, setViewInvite] = useState(false);
-
+  const [data, setData] = useState();
   useEffect(() => {
     fetch(`http://193.123.253.133:5000/users/${props.id}/profile`)
-      .then(res => {
-        return res.json();
+      .then(response => {
+        return response.json();
       })
-      .then(data => {
+      .then(response => {
+        setData(response);
         console.log(data);
       })
       .catch(err => {
@@ -627,27 +650,11 @@ export default function Footer(props) {
     </ScrollView>
   );
 }
-export const basicDimensions = {
-  // 디자이너가 작업하고 있는 XD파일 스크린의 세로,가로
-  height: 812,
-  width: 375,
-};
-
-export const height = ( // 높이 변환 작업
-  Dimensions.get('screen').height *
-  (1 / basicDimensions.height)
-).toFixed(2);
-
-export const width = ( // 가로 변환 작업
-  Dimensions.get('screen').width *
-  (1 / basicDimensions.width)
-).toFixed(2);
 
 const styles = StyleSheet.create({
   article: {
     height: 600,
     backgroundColor: 'white',
-    zIndex: 1,
   },
   subDiv: {
     height: 1500,
@@ -670,7 +677,6 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     marginTop: 10,
   },
-  profile: {},
   profileEdit: {
     position: 'absolute',
     right: 10,
@@ -701,7 +707,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderColor: '#7d63eb',
     backgroundColor: '#ffffff',
-    elevation: 5,
   },
   challengeName: {
     justifyContent: 'center',
@@ -808,9 +813,6 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     marginTop: 100,
     fontSize: 16,
-  },
-  officialDiv: {
-    paddingTop: 40,
   },
   officiallistone: {
     borderBottomColor: '#C4C4C4',

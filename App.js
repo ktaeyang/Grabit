@@ -73,7 +73,7 @@ const App = () => {
         <Manual setApp={setApp} email={id} /> :
         app === "login" ?
         <Login setApp={setApp} setId={setId} setName={setName} /> :
-        <Home app={app} setApp={setApp}/>
+        <Home app={app} setApp={setApp} email={id} name={name}/>
       }
       </View>
       {(app === "feed" || app === "mypage" || app === "mychallenge" || app === "home") &&
