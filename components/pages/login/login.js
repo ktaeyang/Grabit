@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   TouchableOpacity,
   StyleSheet,
@@ -72,7 +72,9 @@ function Hobby(props) {
   function joinComplete() {
     fetch('http://193.123.253.133:5000/users', {
       method: 'POST',
-      headers: {'Content-Type': 'application/json'},
+      headers: {
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify({
         age: props.age,
         gender: props.gender,
@@ -84,8 +86,8 @@ function Hobby(props) {
       }),
     })
       .then(data => {
-        console.log(data);
         setComplete(true);
+        console.log(data);
       })
       .catch(error => console.log(error));
   }
@@ -147,11 +149,21 @@ function Hobby(props) {
 }
 
 function Icon(props) {
-  const [icon, setIcon] = useState(1);
+  const [icon, setIcon] = useState(0);
   const [hobby, setHobby] = useState(false);
-
+  const IconImage = styled.Image`
+    margin: 20px;
+    opacity: ${props => (icon === props.num ? 1 : 0.5)};
+  `;
+  const IconContainer = styled.View`
+    width: ${width}px;
+    height: ${height}px;
+    background-color: ${colors.white};
+    position: absolute;
+    top : 20px;
+  `;
   return (
-    <View style={styles.subDiv2}>
+    <IconContainer>
       <Text
         style={{marginTop: 10, marginLeft: 40, fontSize: 20, color: 'black'}}>
         프로필로 사용할
@@ -161,82 +173,46 @@ function Icon(props) {
       </Text>
       <View style={styles.iconView}>
         <TouchableOpacity onPress={() => setIcon(1)}>
-          <Image
-            style={icon == 1 ? styles.iconstyle : styles.nonicon}
-            source={require('../../../image/emoji1.png')}
-          />
+          <IconImage source={require('../../../image/emoji1.png')} num={1} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => setIcon(2)}>
-          <Image
-            style={icon == 2 ? styles.iconstyle : styles.nonicon}
-            source={require('../../../image/emoji2.png')}
-          />
+          <IconImage source={require('../../../image/emoji2.png')} num={2} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => setIcon(3)}>
-          <Image
-            style={icon == 3 ? styles.iconstyle : styles.nonicon}
-            source={require('../../../image/emoji3.png')}
-          />
+          <IconImage source={require('../../../image/emoji3.png')} num={3} />
         </TouchableOpacity>
       </View>
       <View style={styles.iconView}>
         <TouchableOpacity onPress={() => setIcon(4)}>
-          <Image
-            style={icon == 4 ? styles.iconstyle : styles.nonicon}
-            source={require('../../../image/emoji4.png')}
-          />
+          <IconImage source={require('../../../image/emoji4.png')} num={4} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => setIcon(5)}>
-          <Image
-            style={icon == 5 ? styles.iconstyle : styles.nonicon}
-            source={require('../../../image/emoji5.png')}
-          />
+          <IconImage source={require('../../../image/emoji5.png')} num={5} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => setIcon(6)}>
-          <Image
-            style={icon == 6 ? styles.iconstyle : styles.nonicon}
-            source={require('../../../image/emoji6.png')}
-          />
+          <IconImage source={require('../../../image/emoji6.png')} num={6} />
         </TouchableOpacity>
       </View>
       <View style={styles.iconView}>
         <TouchableOpacity onPress={() => setIcon(7)}>
-          <Image
-            style={icon == 7 ? styles.iconstyle : styles.nonicon}
-            source={require('../../../image/emoji7.png')}
-          />
+          <IconImage source={require('../../../image/emoji7.png')} num={7} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => setIcon(8)}>
-          <Image
-            style={icon == 8 ? styles.iconstyle : styles.nonicon}
-            source={require('../../../image/emoji8.png')}
-          />
+          <IconImage source={require('../../../image/emoji8.png')} num={8} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => setIcon(9)}>
-          <Image
-            style={icon == 9 ? styles.iconstyle : styles.nonicon}
-            source={require('../../../image/emoji9.png')}
-          />
+          <IconImage source={require('../../../image/emoji9.png')} num={9} />
         </TouchableOpacity>
       </View>
       <View style={styles.iconView}>
         <TouchableOpacity onPress={() => setIcon(10)}>
-          <Image
-            style={icon == 10 ? styles.iconstyle : styles.nonicon}
-            source={require('../../../image/emoji10.png')}
-          />
+          <IconImage source={require('../../../image/emoji10.png')} num={10} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => setIcon(11)}>
-          <Image
-            style={icon == 11 ? styles.iconstyle : styles.nonicon}
-            source={require('../../../image/emoji11.png')}
-          />
+          <IconImage source={require('../../../image/emoji11.png')} num={11} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => setIcon(12)}>
-          <Image
-            style={icon == 12 ? styles.iconstyle : styles.nonicon}
-            source={require('../../../image/emoji12.png')}
-          />
+          <IconImage source={require('../../../image/emoji12.png')} num={12} />
         </TouchableOpacity>
       </View>
       <TouchableOpacity
@@ -263,7 +239,7 @@ function Icon(props) {
           setApp={props.setApp}
         />
       ) : undefined}
-    </View>
+    </IconContainer>
   );
 }
 
@@ -422,6 +398,7 @@ function Join(props) {
         })
         .catch(error => console.log(error));
     }
+    setIcon(true);
   }
 
   return (
@@ -640,6 +617,7 @@ const LoginInputContainer = styled.View`
   margin-left: 20px;
   margin-right: 20px;
 `;
+
 const styles = StyleSheet.create({
   subDiv2: {
     width: '100%',
