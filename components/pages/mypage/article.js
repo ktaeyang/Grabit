@@ -537,7 +537,6 @@ export default function Footer(props) {
         console.log(err);
       });
   });
-
   return (
     <ScrollView style={styles.article} nestedScrollEnabled={true}>
       <View
@@ -556,7 +555,7 @@ export default function Footer(props) {
           style={styles.profile}
           source={require('../../../image/userbaseIcon.png')}
         />
-        <Text style={styles.profileName}>성장하는 {props.name}님</Text>
+        <Text style={styles.profileName}>성장하는 {props.id}님</Text>
       </View>
       <View style={styles.challengeList}>
         <View style={styles.challenges}>

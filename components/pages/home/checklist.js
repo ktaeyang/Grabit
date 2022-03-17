@@ -10,7 +10,6 @@ import {
 } from 'react-native';
 import PerImage from '../perImage';
 
-const url = "http://193.123.253.133:5000"
 function Check({
   checked,
   setComplete,
@@ -114,10 +113,15 @@ export default function CheckList(props) {
       startDate: '',
     },
   ]);
+  let params = {
+    'filterBy' : 'LATEST'
+  };
+  let query = Object.keys(params)
+    .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(params[k]))
+    .join('&');
+  let url = `http://193.123.253.133:5000/users/${props.props.email}/challenges/progress?` + query;
   useEffect(() => {
-    fetch(
-      `${url}/users/${props.props.email}/challenges/progress`,
-    )
+    fetch(url)
       .then(response => response.json())
       .then(data => {
         setOfficial(data);
