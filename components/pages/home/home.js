@@ -13,6 +13,8 @@ import {
 import Header from './header';
 import WeekCalendar from './weekcalendar';
 import CheckList from './checklist';
+import NoChallengeScreen from './nochallenge';
+import styled from 'styled-components/native';
 
 function Complete(props) {
   return (
@@ -134,10 +136,11 @@ function Complete3Days(props, isTogether) {
   );
 }
 
-export default function Footer(props, isTogether) {
+export default function HomeScreen(props, isTogether) {
   const [complete, setComplete] = useState(false);
   const [id, setId] = useState(1);
   const [complete3Days, setComplete3Days] = useState(false);
+  const [isChallenge, setChallenge] = useState(false);
   var theMonth = new Date().getMonth() + 1;
   var theDate = new Date().getDate();
   var theDayOfWeek = new Date().getDay();
@@ -150,15 +153,15 @@ export default function Footer(props, isTogether) {
     else if (theDayOfWeek === 5) return '금';
     else if (theDayOfWeek === 6) return '토';
   };
-  useEffect(() => {
-    calDay()
-  });
   return (
     <>
       <Header setApp={props.setApp} app={props.app} />
       <View style={styles.article}>
         <View>
-          <Text style={styles.date}>{`${theMonth}월 ${theDate}일 ${calDay()}요일`}</Text>
+          <Text
+            style={
+              styles.date
+            }>{`${theMonth}월 ${theDate}일 ${calDay()}요일`}</Text>
         </View>
         <View style={styles.wise}>
           <Text style={styles.wiseTxt}>
@@ -166,7 +169,11 @@ export default function Footer(props, isTogether) {
           </Text>
         </View>
         {!complete3Days && <WeekCalendar day={props.day} />}
-        <CheckList setComplete={setComplete} props={props}/>
+        {isChallenge ? (
+          <CheckList setComplete={setComplete} props={props} />
+        ) : (
+          <NoChallengeScreen />
+        )}
       </View>
       {complete ? (
         <Complete
@@ -188,7 +195,7 @@ export default function Footer(props, isTogether) {
 }
 const styles = StyleSheet.create({
   article: {
-    backgroundColor : '#ffffff',
+    backgroundColor: '#ffffff',
     paddingHorizontal: 24,
     justifyContent: 'center',
     flex: 5,
@@ -206,8 +213,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     backgroundColor: '#F3F3F3',
     paddingHorizontal: 30,
-    height : 30,
-    justifyContent : 'center'
+    height: 30,
+    justifyContent: 'center',
   },
   wiseTxt: {
     color: '#000000',

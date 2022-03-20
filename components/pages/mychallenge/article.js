@@ -1,50 +1,43 @@
 import React, {useEffect, useState} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  TouchableOpacity,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-  Image,
-  TextInput,
-} from 'react-native';
+import {TouchableOpacity, StyleSheet, Text, View, Alert} from 'react-native';
 import CheckList from './checklist';
+import styled from 'styled-components/native';
+import colors from '../../src/colors';
+import {detailImages} from '../../src/images';
 
 function ViewEachHabit(props) {
   return (
-    <View style={styles.subDiv}>
+    <HabitContainer>
       <View style={{flexDirection: 'row'}}>
-        <Image source={require('../../../image/alo0.png')} />
-        <Text>12일차</Text>
-        <View>
-          <Text>3주 습관</Text>
-          <Text>매일 하루 하나의 캘리그라피를 3주 동안 진행합니다 :)</Text>
-        </View>
+        <EllipseContainer>
+          <EllipseImg
+            source={detailImages.ellipse}
+            style={{resizeMode: 'contain'}}
+          />
+          <EllipseTxt>12일차</EllipseTxt>
+        </EllipseContainer>
+
+        <HeaderContainer>
+          <Header>
+            <HeaderTxt>3주 습관</HeaderTxt>
+          </Header>
+          <ContentsTxt>
+            매일 하루 하나의 캘리그라피를 3주 동안 진행합니다 :)
+          </ContentsTxt>
+        </HeaderContainer>
       </View>
-      <View>
-        <Text>000님은 현재</Text>
-        <Text>
-          <Text>7등</Text>/16명
-        </Text>
-      </View>
-      <View>
-        <Text>그룹 습관 메모</Text>
-        <Text>
-          <Text>참가자 1</Text> 오늘은 할 만 했다. 음 열심히 했군
-        </Text>
-        <Text>
-          <Text>참가자 1</Text> 오늘은 할 만 했다. 음 열심히 했군
-        </Text>
-      </View>
-    </View>
+
+      <GrapeContainer></GrapeContainer>
+    </HabitContainer>
   );
 }
 
 export default function Article() {
   const [c, setC] = useState('a');
   const [habitId, viewEachHabit] = useState(0);
+  const alert = () => {
+    Alert.alert('Grabit','준비 중입니다.');
+  };
   return (
     <View style={styles.article}>
       <View style={styles.selectDivs}>
@@ -87,7 +80,61 @@ export default function Article() {
     </View>
   );
 }
-
+const HabitContainer = styled.View`
+  height: 550px;
+  background-color: ${colors.white};
+  position: absolute;
+  z-index: 20;
+  width: 100%;
+`;
+const EllipseContainer = styled.View`
+  justify-content: center;
+  margin: 20px;
+  flex: 1;
+`;
+const EllipseImg = styled.Image`
+  align-self: center;
+`;
+const EllipseTxt = styled.Text`
+  font-weight: bold;
+  color: ${colors.purple};
+  position: absolute;
+  align-self: center;
+`;
+const HeaderContainer = styled.View`
+  flex: 3;
+`;
+const Header = styled.View`
+  width: 70px;
+  height: 30px;
+  background-color: #f1f1f1;
+  border-radius: 100px;
+  justify-content: center;
+  margin-bottom: 15px;
+  margin-top: 10px;
+`;
+const HeaderTxt = styled.Text`
+  font-weight: bold;
+  font-size: 12px;
+  color: ${colors.purple};
+  text-align: center;
+`;
+const ContentsTxt = styled.Text`
+  font-weight: 500;
+  color: ${colors.black};
+  text-align: left;
+  margin: 5px;
+  margin-right: 20px;
+`;
+const GrapeContainer = styled.View`
+  width: 90%;
+  height: 190px;
+  background-color: #f5f5f5;
+  border-radius: 20px;
+  justify-content: center;
+  margin-bottom: 20px;
+  align-self: center;
+`;
 const styles = StyleSheet.create({
   article: {
     height: 550,

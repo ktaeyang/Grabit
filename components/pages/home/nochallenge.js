@@ -1,8 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import {Text, View} from 'react-native';
 import styled from 'styled-components/native';
 import colors from '../../src/colors';
-import Colors from '../../src/colors';
 import {homeImages} from '../../src/images';
 const NoChallengeScreen = () => {
   return (
@@ -23,7 +21,7 @@ const NoChallengeScreen = () => {
 const GrayLine = styled.View`
   width: 100%;
   height: 1px;
-  background-color: ${Colors.gray};
+  background-color: ${colors.gray};
   margin-top: 20px;
 `;
 const NoCLGContainer = styled.View`
@@ -36,8 +34,7 @@ const HeaderImgContainer = styled.View`
   margin-top: 60px;
 `;
 const BtnContainer = styled.View`
-  flex: 3;
-  justify-content: center;
+  flex: 1.5;
 `;
 const ExclamationImg = styled.Image`
   width: 35px;

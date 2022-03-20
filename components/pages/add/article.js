@@ -335,7 +335,7 @@ function Add3(props) {
     ].join('-');
   };
 
-  function addProject(props) {
+  const addProject = () => {
     fetch('http://193.123.253.133:5000/challenges', {
       method: 'POST',
       headers: {
@@ -345,7 +345,7 @@ function Add3(props) {
         category: props.category,
         description: '챌린지 설명입니다',
         imageField: 1,
-        name: props.categoryName,
+        name: props.name,
         startDate: date.yyyymmdd(),
         period: 21,
         public: !props.isAlone,
@@ -354,9 +354,12 @@ function Add3(props) {
       .then(response => {
         setPrev(true);
         console.log(response);
+      })
+      .catch(error => {
+        console.log(error);
       });
   }
-
+  
   return (
     <View style={styles.subDiv}>
       <Text style={[styles.addTitle, {marginTop: 40}]}>언제부터</Text>

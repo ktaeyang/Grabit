@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   View,
   Image,
+  Alert,
 } from 'react-native';
 import PerImage from '../perImage';
 
@@ -24,6 +25,9 @@ function Check({
   challenge,
   viewEachHabit,
 }) {
+  const alert = () => {
+    Alert.alert('Grabit','준비 중입니다.');
+  };
   return (
     <View
       style={
@@ -56,7 +60,7 @@ function Check({
         />
       </View>
       <TouchableOpacity
-        onPress={() => viewEachHabit(true)}
+        onPress={alert}
         style={styles.habitInfo}>
         <Text
           style={
@@ -84,7 +88,7 @@ function Check({
         </Text>
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={() => writeMemory(checked, setCheck)}
+        onPress={alert}
         style={styles.checkInfo}>
         <Image
           source={

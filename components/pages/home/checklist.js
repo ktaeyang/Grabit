@@ -125,7 +125,7 @@ export default function CheckList(props) {
       .then(response => response.json())
       .then(data => {
         setOfficial(data);
-        console.log(official);
+        console.log(query);
       })
       .catch(err => console.log(err));
   }, []);

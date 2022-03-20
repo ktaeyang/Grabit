@@ -108,10 +108,12 @@ function Room(props) {
 function NewRoom(props) {
   useEffect(() => {
     fetch(`http://193.123.253.133:5000/users/${props.id}/challenges/1`)
-      .then(response => response.json())
+      .then(response => response.text())
       .then(data => console.log(data))
-      .catch(error => {console.log(error)})
-    console.log(props);
+      .catch(error => {
+        console.log(error);
+      });
+    //console.log(props);
   });
   return (
     <TouchableOpacity
@@ -132,17 +134,13 @@ export default function Rooms(props) {
   const [search, setSearch] = useState('');
 
   function searchs() {
-    fetch('http://193.123.253.133:5000/users/password', {
-      method: 'POST',
-      body: JSON.stringify({
-        challengeCategory: category,
-        name: search,
-        period: 3,
-      }),
-    })
+    fetch('http://193.123.253.133:5000/challenges', {})
       .then(response => response.json())
       .then(response => {
-        props.setForgotPW(false);
+        console.log(response);
+      })
+      .catch(error => {
+        console.log(error);
       });
   }
   return (

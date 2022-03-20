@@ -20,11 +20,15 @@ export const basicDimensions = {
   width: 375,
 };
 
-export const height = // 높이 변환 작업
-(Dimensions.get('screen').height * (1 / basicDimensions.height)).toFixed(2);
+export const height = ( // 높이 변환 작업
+  Dimensions.get('screen').height *
+  (1 / basicDimensions.height)
+).toFixed(2);
 
-export const width = // 가로 변환 작업
-(Dimensions.get('screen').width * (1 / basicDimensions.width)).toFixed(2);
+export const width = ( // 가로 변환 작업
+  Dimensions.get('screen').width *
+  (1 / basicDimensions.width)
+).toFixed(2);
 
 function ViewInvite(props) {
   return (
@@ -67,97 +71,83 @@ function ViewInvite(props) {
 function Icon(props) {
   const [icon, setIcon] = useState(1);
   const [hobby, setHobby] = useState(false);
-
+  const IconImage = styled.Image`
+    margin: 20px;
+    opacity: ${props => (icon === props.num ? 1 : 0.5)};
+  `;
+  const IconContainer = styled.View`
+    width: 100%;
+    height: 1000px;
+    background-color: ${colors.white};
+    position: absolute;
+  `;
+  const PurpleBtnTxt = styled.Text`
+    text-align: center;
+    font-weight: 400;
+    font-size: 18px;
+    color: white;
+  `;
+  const PurpleBtn = styled.TouchableOpacity`
+    background-color: ${colors.purple};
+    width: 90%;
+    height: 50px;
+    border-radius: 100px;
+    align-self: center;
+    justify-content: center;
+    margin-top: 10px;
+  `;
   return (
-    <View style={styles.subDiv}>
-      <Text>프로필로 사용할</Text>
-      <Text>아이콘을 선택해 주세요!</Text>
+    <IconContainer>
+      <IconEditTxt>프로필로 사용할</IconEditTxt>
+      <IconEditTxt>아이콘을 변경해 주세요!</IconEditTxt>
       <View style={styles.iconView}>
         <TouchableOpacity onPress={() => setIcon(1)}>
-          <Image
-            style={icon == 1 ? styles.iconstyle : styles.nonicon}
-            source={require('../../../image/emoji1.png')}
-          />
+          <IconImage num={1} source={require('../../../image/emoji1.png')} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => setIcon(2)}>
-          <Image
-            style={icon == 2 ? styles.iconstyle : styles.nonicon}
-            source={require('../../../image/emoji2.png')}
-          />
+          <IconImage num={2} source={require('../../../image/emoji2.png')} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => setIcon(3)}>
-          <Image
-            style={icon == 3 ? styles.iconstyle : styles.nonicon}
-            source={require('../../../image/emoji3.png')}
-          />
+          <IconImage num={3} source={require('../../../image/emoji3.png')} />
         </TouchableOpacity>
       </View>
       <View style={styles.iconView}>
         <TouchableOpacity onPress={() => setIcon(4)}>
-          <Image
-            style={icon == 4 ? styles.iconstyle : styles.nonicon}
-            source={require('../../../image/emoji4.png')}
-          />
+          <IconImage num={4} source={require('../../../image/emoji4.png')} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => setIcon(5)}>
-          <Image
-            style={icon == 5 ? styles.iconstyle : styles.nonicon}
-            source={require('../../../image/emoji5.png')}
-          />
+          <IconImage num={5} source={require('../../../image/emoji5.png')} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => setIcon(6)}>
-          <Image
-            style={icon == 6 ? styles.iconstyle : styles.nonicon}
-            source={require('../../../image/emoji6.png')}
-          />
+          <IconImage num={6} source={require('../../../image/emoji6.png')} />
         </TouchableOpacity>
       </View>
       <View style={styles.iconView}>
         <TouchableOpacity onPress={() => setIcon(7)}>
-          <Image
-            style={icon == 7 ? styles.iconstyle : styles.nonicon}
-            source={require('../../../image/emoji7.png')}
-          />
+          <IconImage num={7} source={require('../../../image/emoji7.png')} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => setIcon(8)}>
-          <Image
-            style={icon == 8 ? styles.iconstyle : styles.nonicon}
-            source={require('../../../image/emoji8.png')}
-          />
+          <IconImage num={8} source={require('../../../image/emoji8.png')} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => setIcon(9)}>
-          <Image
-            style={icon == 9 ? styles.iconstyle : styles.nonicon}
-            source={require('../../../image/emoji9.png')}
-          />
+          <IconImage num={9} source={require('../../../image/emoji9.png')} />
         </TouchableOpacity>
       </View>
       <View style={styles.iconView}>
         <TouchableOpacity onPress={() => setIcon(10)}>
-          <Image
-            style={icon == 10 ? styles.iconstyle : styles.nonicon}
-            source={require('../../../image/emoji10.png')}
-          />
+          <IconImage num={10} source={require('../../../image/emoji10.png')} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => setIcon(11)}>
-          <Image
-            style={icon == 11 ? styles.iconstyle : styles.nonicon}
-            source={require('../../../image/emoji11.png')}
-          />
+          <IconImage num={11} source={require('../../../image/emoji11.png')} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => setIcon(12)}>
-          <Image
-            style={icon == 12 ? styles.iconstyle : styles.nonicon}
-            source={require('../../../image/emoji12.png')}
-          />
+          <IconImage num={12} source={require('../../../image/emoji12.png')} />
         </TouchableOpacity>
       </View>
-      <TouchableOpacity
-        onPress={() => props.setProfileEdit(false)}
-        style={styles.purpleBtn}>
-        <Text style={styles.purpleBtnTxt}>결정하기</Text>
-      </TouchableOpacity>
-    </View>
+      <PurpleBtn onPress={() => props.setProfileEdit(false)}>
+        <PurpleBtnTxt>변경 완료</PurpleBtnTxt>
+      </PurpleBtn>
+    </IconContainer>
   );
 }
 
@@ -260,7 +250,13 @@ const OfficialContainer = styled.View`
   background-color: ${colors.white};
   position: absolute;
 `;
-
+const IconEditTxt = styled.Text`
+  font-size: 22px;
+  font-weight: 700;
+  margin-left: 30px;
+  color: ${colors.black};
+  margin-bottom: 10px;
+`;
 function AddNotices() {
   fetch('http://193.123.253.133:5000/board/notice', {
     method: 'POST',
@@ -566,7 +562,7 @@ export default function Footer(props) {
             />
             <Text style={styles.myhabit}>함께</Text>
           </View>
-          <Text style={styles.challengNum}>3</Text>
+          <Text style={styles.challengNum}>0</Text>
         </View>
         <View style={styles.challengestwo}>
           <View style={styles.challengeName}>
@@ -576,13 +572,13 @@ export default function Footer(props) {
             />
             <Text style={styles.myhabit}>혼자</Text>
           </View>
-          <Text style={styles.challengNum}>2</Text>
+          <Text style={styles.challengNum}>0</Text>
         </View>
         <View style={styles.challenges}>
           <View style={styles.challengeName}>
             <Text style={styles.myhabit}>완료</Text>
           </View>
-          <Text style={styles.challengNum}>5</Text>
+          <Text style={styles.challengNum}>0</Text>
         </View>
       </View>
       <View style={styles.mylist}>
@@ -932,8 +928,7 @@ const styles = StyleSheet.create({
   },
   iconView: {
     flexDirection: 'row',
-    marginVertical: 10,
-    marginHorizontal: 40,
+    justifyContent: 'center',
   },
   iconstyle: {
     margin: 20,
