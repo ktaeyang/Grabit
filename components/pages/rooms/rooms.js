@@ -20,19 +20,20 @@ function Oneroom(props) {
   const [userlist, setUL] = useState([
     {name: '사용자', Icon: require('../../../image/userbaseIcon.png')},
   ]);
-
-  // useEffect(() => {
-  //     fetch('http://193.123.253.133:5000/challenges/' + props.view, {
-  //         method: 'GET',
-  //     }).then(response => response.json())
-  //     .then(response => {
-  //         setbI(response.backgroundImage);
-  //         setdes(response.description);
-  //         setna(response.name);
-  //         setpe(response.period);
-  //         setUL(response.userList);
-  //     })
-  // }, [])
+  useEffect(() => {
+    fetch('http://193.123.253.133:5000/challenges/' + props.view, {
+      method: 'GET',
+    })
+      .then(response => response.json())
+      .then(response => {
+        // setbI(response.backgroundImage);
+        // setdes(response.description);
+        // setna(response.name);
+        // setpe(response.period);
+        // setUL(response.userList);
+        console.log(response);
+      });
+  }, []);
   function join() {
     // useEffect(() => {
     //     fetch('http://193.123.253.133:5000/users/' + props.userId + '/challenges/' + props.view, {
@@ -107,13 +108,13 @@ function Room(props) {
 
 function NewRoom(props) {
   useEffect(() => {
-    fetch(`http://193.123.253.133:5000/users/${props.id}/challenges/1`)
+    fetch(`http://193.123.253.133:5000/users/${props.id}/challenges/${props.d}`)
       .then(response => response.text())
       .then(data => console.log(data))
       .catch(error => {
         console.log(error);
       });
-    //console.log(props);
+    console.log(props);
   });
   return (
     <TouchableOpacity
@@ -132,9 +133,9 @@ export default function Rooms(props) {
   const [view, viewRoom] = useState(null);
   const [category, setCategory] = useState('HEALTH');
   const [search, setSearch] = useState('');
-
+  const [newChallenges, setNewChallenges] = useState('');
   function searchs() {
-    fetch('http://193.123.253.133:5000/challenges', {})
+    fetch('http://193.123.253.133:5000/challenges')
       .then(response => response.json())
       .then(response => {
         console.log(response);
@@ -143,6 +144,12 @@ export default function Rooms(props) {
         console.log(error);
       });
   }
+  useEffect(() => {
+    fetch('http://193.123.253.133:5000/challenges/new')
+      .then(res => res.json())
+      .then(data => console.log(data))
+      .catch(error => console.log(error));
+  }, []);
   return (
     <>
       <ScrollView

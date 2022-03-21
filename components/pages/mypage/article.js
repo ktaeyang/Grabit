@@ -232,7 +232,7 @@ function Official() {
 
   return (
     <OfficialContainer>
-      {official.map((notice, i) => {
+      {official.map((notice) => {
         return (
           <OfficialList
             content={notice.content}
