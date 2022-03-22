@@ -33,7 +33,7 @@ export default function Footer(props) {
 
         <TouchableOpacity style={styles.addIcon} onPress={() => props.setApp("add")}>
           <Image source={props.app === "add" ?
-            require('../image/alone_add.png') :
+            require('../image/together_add.png') :
             require('../image/together_add.png')} />
         </TouchableOpacity>
 

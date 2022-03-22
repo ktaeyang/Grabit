@@ -8,10 +8,11 @@ import {
   TextInput,
   ScrollView,
   Dimensions,
+  Alert,
 } from 'react-native';
 import Modal from 'react-native-modal';
 import {GrabitTerms} from '../../json/terms';
-import colors from '../../src/colors';
+import colors from '../../../src/colors';
 import styled from 'styled-components/native';
 
 export const basicDimensions = {
@@ -20,15 +21,18 @@ export const basicDimensions = {
   width: 375,
 };
 
-export const height = ( // 높이 변환 작업
-  Dimensions.get('screen').height *
-  (1 / basicDimensions.height)
-).toFixed(2);
+export const height = // 높이 변환 작업
+(Dimensions.get('screen').height * (1 / basicDimensions.height)).toFixed(2);
 
-export const width = ( // 가로 변환 작업
-  Dimensions.get('screen').width *
-  (1 / basicDimensions.width)
-).toFixed(2);
+export const width = // 가로 변환 작업
+(Dimensions.get('screen').width * (1 / basicDimensions.width)).toFixed(2);
+
+const KakaoBtn = styled.TouchableOpacity``;
+const LinkcopyBtn = styled.TouchableOpacity``;
+
+const InviteFriends = () => {
+  Alert.alert('Grabit', '현재 버전에서는 지원하지 않는 기능입니다.');
+};
 
 function ViewInvite(props) {
   return (
@@ -41,21 +45,21 @@ function ViewInvite(props) {
         <Text style={styles.inviteTitle}>친구 초대</Text>
 
         <View style={{flexDirection: 'row', justifyContent: 'center'}}>
-          <View>
+          <KakaoBtn onPress={() => InviteFriends()}>
             <Image
               style={styles.inviteIcon}
               source={require('../../../image/kakao.png')}
             />
             <Text style={styles.inviteTxt}>카카오톡</Text>
-          </View>
+          </KakaoBtn>
 
-          <View>
+          <LinkcopyBtn onPress={() => InviteFriends()}>
             <Image
               style={styles.inviteIcon}
               source={require('../../../image/link.png')}
             />
             <Text style={styles.inviteTxt}>링크 복사</Text>
-          </View>
+          </LinkcopyBtn>
         </View>
 
         <TouchableOpacity
@@ -232,7 +236,7 @@ function Official() {
 
   return (
     <OfficialContainer>
-      {official.map((notice) => {
+      {official.map(notice => {
         return (
           <OfficialList
             content={notice.content}
@@ -329,7 +333,7 @@ function ServiceTxt() {
   return (
     <ScrollView style={styles.helpContainer} nestedScrollEnabled={true}>
       <View>
-        {GrabitTerms.map((content, i) => {
+        {GrabitTerms.map((content) => {
           return (
             <View>
               <Text style={styles.txtHeader}> {content.head}</Text>

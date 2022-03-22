@@ -76,7 +76,7 @@ const App = () => {
         <Home app={app} setApp={setApp} email={id} name={name}/>
       }
       </View>
-      {(app === "feed" || app === "mypage" || app === "mychallenge" || app === "home") &&
+      {(app === "feed" || app === "mypage" || app === "mychallenge" || app === "home" || app === "add") &&
       <View style = {{flex : 0.07}}>
       <Footer app={app} setApp={setApp} />
       </View>
