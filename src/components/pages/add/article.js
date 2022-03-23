@@ -1,18 +1,16 @@
 import React, {useEffect, useState} from 'react';
 import DatePicker from 'react-native-date-picker';
 import {
-  SafeAreaView,
   ScrollView,
   TouchableOpacity,
   StyleSheet,
   Text,
   StatusBar,
-  useColorScheme,
   View,
   Image,
   TextInput,
 } from 'react-native';
-
+import { aloneImages,togetherImages } from '../../../images';
 export default function Footer(props) {
   const [alone_add, setAlone] = useState(false);
   const [together_add, setTogether] = useState(false);
@@ -358,8 +356,8 @@ function Add3(props) {
       .catch(error => {
         console.log(error);
       });
-  }
-  
+  };
+
   return (
     <View style={styles.subDiv}>
       <Text style={[styles.addTitle, {marginTop: 40}]}>언제부터</Text>
@@ -448,8 +446,8 @@ function Add4(props) {
         style={styles.checkImg}
         source={
           props.isAlone
-            ? require('../../../image/aloneCheck.png')
-            : require('../../../image/togetherCheck.png')
+            ? aloneImages.aloneCheck
+            : togetherImages.togetherCheck
         }
       />
       <Text

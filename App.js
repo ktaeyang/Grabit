@@ -19,15 +19,15 @@ import {
   Alert,
 } from 'react-native';
 
-import Home from "./components/pages/home/home";
-import Mypage from "./components/pages/mypage/mypage";
-import Mychallenge from "./components/pages/mychallenge/mychallenge";
-import Add from "./components/pages/add/add";
-import Start from "./components/pages/start/start";
-import Manual from "./components/pages/start/manual";
-import Rooms from "./components/pages/rooms/rooms";
-import Login from "./components/pages/login/login";
-import Footer from "./components/footer";
+import Home from "./src/components/pages/home/home";
+import Mypage from "./src/components/pages/mypage/mypage";
+import Mychallenge from "./src/components/pages/mychallenge/mychallenge";
+import Add from "./src/components/pages/add/add";
+import Start from "./src/components/pages/start/start";
+import Manual from "./src/components/pages/start/manual";
+import Rooms from "./src/components/pages/rooms/rooms";
+import Login from "./src/components/pages/login/login";
+import Footer from "./src/components/footer";
 
 
 

@@ -1,20 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import {
-  TouchableOpacity,
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-  Image,
-} from 'react-native';
+import {TouchableOpacity, StyleSheet, Text, View, Image} from 'react-native';
 import Header from './header';
 import WeekCalendar from './weekcalendar';
 import CheckList from './checklist';
 import NoChallengeScreen from './nochallenge';
 import styled from 'styled-components/native';
+import {homeImages,aloneImages,togetherImages} from '../../../images'
 
 function Complete(props) {
   return (
@@ -36,13 +27,13 @@ function Complete(props) {
       <View
         style={{flexDirection: 'row', marginHorizontal: 90, marginVertical: 5}}>
         <TouchableOpacity>
-          <Image source={require('../../../image/smile.png')} />
+          <Image source={homeImages.smile} />
         </TouchableOpacity>
         <TouchableOpacity style={{marginHorizontal: 5}}>
-          <Image source={require('../../../image/soso.png')} />
+          <Image source={homeImages.soso} />
         </TouchableOpacity>
         <TouchableOpacity>
-          <Image source={require('../../../image/bad.png')} />
+          <Image source={homeImages.bad} />
         </TouchableOpacity>
       </View>
       <TouchableOpacity onPress={() => props.setComplete3Days(true)}>
@@ -79,8 +70,8 @@ function Complete3Days(props, isTogether) {
         style={styles.checkImg}
         source={
           isTogether
-            ? require('../../../image/aloneCheck.png')
-            : require('../../../image/togetherCheck.png')
+            ? aloneImages.aloneCheck
+            : togetherImages.togetherCheck
         }
       />
       <Text

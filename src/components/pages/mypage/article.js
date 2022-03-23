@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import Modal from 'react-native-modal';
 import {GrabitTerms} from '../../json/terms';
-import colors from '../../../src/colors';
+import colors from '../../../colors';
 import styled from 'styled-components/native';
 
 export const basicDimensions = {

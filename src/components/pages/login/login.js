@@ -15,7 +15,7 @@ import RNPickerSelect from 'react-native-picker-select';
 import {GrabitTerms} from '../../json/terms';
 import colors from '../../src/colors';
 import styled from 'styled-components/native';
-import {loginImages} from '../../src/images';
+import {loginImages, aloneImages, togetherImages} from '../../../images';
 
 function CompleteJoin(props) {
   return (
@@ -23,9 +23,7 @@ function CompleteJoin(props) {
       <Image
         style={[styles.checkImg, {marginTop: 200}]}
         source={
-          props.isAlone
-            ? require('../../../image/aloneCheck.png')
-            : require('../../../image/togetherCheck.png')
+          props.isAlone ? aloneImages.aloneCheck : togetherImages.togetherCheck
         }
       />
       <Text
@@ -160,7 +158,7 @@ function Icon(props) {
     height: ${height}px;
     background-color: ${colors.white};
     position: absolute;
-    top : 20px;
+    top: 20px;
   `;
   return (
     <IconContainer>
